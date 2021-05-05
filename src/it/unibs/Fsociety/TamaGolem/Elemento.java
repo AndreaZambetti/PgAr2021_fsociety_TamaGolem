@@ -7,17 +7,18 @@ import java.util.Set;
 
 public class Elemento {
 
-    private static final String fuoco = "fuoco";
-    private static final String acqua = "acqua";
-    private static final String terra = "terra";
-    private static final String aria = "aria";
-    private static final String elettrico = "elettrico";
-    private static final String radioso = "radioso";
-    private static final String acido = "acido";
-    private static final String tuono = "tuono";
-    private static final String forza = "forza";
+    private static final HashMap<Integer, Elemento> tutti_elementi = new HashMap<>();
+    private static final Elemento elemento_acido = new Elemento("acido");
+    private static final Elemento elemento_acqua = new Elemento("acqua");
+    private static final Elemento elemento_aria = new Elemento("aria");
+    private static final Elemento elemento_elettrico = new Elemento("elettrico");
+    private static final Elemento elemento_forza = new Elemento("forza");
+    private static final Elemento elemento_fuoco = new Elemento("fuoco");
+    private static final Elemento elemento_radioso = new Elemento("radioso");
+    private static final Elemento elemento_terra = new Elemento("terra");
+    private static final Elemento elemento_tuono = new Elemento("tuono");
     private static final int massimo = 9;
-    private static final int minimo = 1;
+    private static final int minimo = 0;
 
     private String nome;
     private ArrayList <String> elementi_deboli;
@@ -59,8 +60,8 @@ public class Elemento {
         /*Finché non sono stati generati il numero di indici richiesti il metodo
           non si interrompe.*/
         while (lista_codici_elementi.size() < numero_elementi){
-            //Genera indici compresi tra 1 e 9
-            int rand = (int)(Math.random() * (massimo - minimo) + minimo);
+            //Genera indici compresi tra 0 e 8
+            int rand = (int)(Math.random() * (massimo - minimo));
             lista_codici_elementi.add(rand);
         }
         /*Non capendo se sia possibile selezionare un certo elemento del set
@@ -69,30 +70,20 @@ public class Elemento {
     }
 
     public HashMap<Integer, Elemento> inizializzaEquilibrio(int numero_elementi){
-        HashMap<Integer, Elemento> tutti_elementi = new HashMap<>();
         HashMap<Integer, Elemento> nuovo_equilibrio = new HashMap<>();
 
         //Inizializzazione degli elementi.
         //Cercare di rimuoverlo da questo metodo poiché in caso di utilizzo
         //del programma per più partite può causare inutili operazioni extra.
-        Elemento elemento_acido = new Elemento(acido);
-        tutti_elementi.put(1, elemento_acido);
-        Elemento elemento_acqua = new Elemento(acqua);
-        tutti_elementi.put(2, elemento_acqua);
-        Elemento elemento_aria = new Elemento(aria);
-        tutti_elementi.put(3, elemento_aria);
-        Elemento elemento_elettrico = new Elemento(elettrico);
-        tutti_elementi.put(4, elemento_elettrico);
-        Elemento elemento_forza = new Elemento(forza);
-        tutti_elementi.put(5, elemento_forza);
-        Elemento elemento_fuoco = new Elemento(fuoco);
-        tutti_elementi.put(6, elemento_fuoco);
-        Elemento elemento_radioso = new Elemento(radioso);
-        tutti_elementi.put(7, elemento_radioso);
-        Elemento elemento_terra = new Elemento(terra);
-        tutti_elementi.put(8, elemento_terra);
-        Elemento elemento_tuono = new Elemento(tuono);
-        tutti_elementi.put(9, elemento_tuono);
+        tutti_elementi.put(0, elemento_acido);
+        tutti_elementi.put(1, elemento_acqua);
+        tutti_elementi.put(2, elemento_aria);
+        tutti_elementi.put(3, elemento_elettrico);
+        tutti_elementi.put(4, elemento_forza);
+        tutti_elementi.put(5, elemento_fuoco);
+        tutti_elementi.put(6, elemento_radioso);
+        tutti_elementi.put(7, elemento_terra);
+        tutti_elementi.put(8, elemento_tuono);
 
         /*Selezione di un numero di elementi casuali richiesti.
           La selezione avviene attraverso i key dell'HashMap.*/
