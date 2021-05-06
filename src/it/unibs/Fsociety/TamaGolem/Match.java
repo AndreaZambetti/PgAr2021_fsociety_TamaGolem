@@ -7,6 +7,8 @@ public class Match {
     private Giocatore player1;
     private Giocatore player2;
     private int lDifficolta;
+    private int scortaPietre ;
+
 
     public Match(Giocatore player1, Giocatore player2, int livelloDiffolta) {
 
@@ -68,6 +70,7 @@ public class Match {
 
 
         if (lDifficolta == 1) {
+
             /*player1.setnGolem().npietre = 3;
             player2.setnGolem().npietre = 3;*/
             player1.setnGolem(2);
@@ -89,6 +92,13 @@ public class Match {
         }
 
 
+    }
+
+    public String vediVincitore ( ){
+        if ( player1.array_golem.size()== 0 ){
+            return player2.getNome();
+        }
+        if ( player2.array_golem.size( )== 0  )
     }
 
 
