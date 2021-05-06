@@ -67,22 +67,27 @@ public class Match {
      */
 
     public void scegliLivelloDifficolta( ) {
-
+            int num ;
 
         if (lDifficolta == 1) {
-
+            num = 5;
+            Elemento.creaNuovoEquilibrio( num  );
             /*player1.setnGolem().npietre = 3;
             player2.setnGolem().npietre = 3;*/
             player1.setnGolem(2);
             player2.setnGolem(2);
 
         } if ( lDifficolta == 2 )  {
+            num = 7;
+            Elemento.creaNuovoEquilibrio( num );
             /*player1.nGolem.npietre = 4;
             player2.nGolem.npietre = 4;*/
             player1.setnGolem(3);
             player2.setnGolem(3);
 
         }if ( lDifficolta== 3 ){
+            num = 9;
+            Elemento.creaNuovoEquilibrio( num  );
             /*player1.nGolem.npietre = 5;
             player2.nGolem.npietre = 5;*/
             player1.setnGolem(3);
@@ -93,12 +98,13 @@ public class Match {
 
 
     }
-
+    // METODO CHE RITORNA IL VINCITORE DELLA PARTITA ( quando il numero di golem e zero)
     public String vediVincitore ( ){
-        if ( player1.array_golem.size()== 0 ){
+        if ( player1.array_golem.size()==0 ){
             return player2.getNome();
         }
-        if ( player2.array_golem.size( )== 0  )
+        if ( player2.array_golem.size( )==0  ){
+            return   player1.getNome();
     }
 
 
