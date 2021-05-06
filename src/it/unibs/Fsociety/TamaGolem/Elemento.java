@@ -69,7 +69,7 @@ public class Elemento {
         return new ArrayList<Integer>(lista_codici_elementi);
     }
 
-    public HashMap<Integer, Elemento> inizializzaEquilibrio(int numero_elementi){
+    public HashMap<Integer, Elemento> inizializzaHashMapEquilibrio(int numero_elementi){
         HashMap<Integer, Elemento> nuovo_equilibrio = new HashMap<>();
 
         //Inizializzazione degli elementi.
