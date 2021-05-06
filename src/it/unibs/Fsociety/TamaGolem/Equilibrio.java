@@ -2,7 +2,7 @@ package it.unibs.Fsociety.TamaGolem;
 
 import java.util.HashMap;
 
-public class Equilibrio {
+public class Equilibrio{
 
     private HashMap<Integer, Elemento> elementi_partita;
 
@@ -15,9 +15,10 @@ public class Equilibrio {
     }
 
     public Equilibrio genera_equilibrio(int numero_elementi){
+
         Equilibrio equilibrio_partita = new Equilibrio();
 
-        //equilibrio_partita.elementi_partita = inizializzaHashMapEquilibrio(numero_elementi);
+        //equilibrio_partita.elementi_partita.inizializzaElementiEquilibrio(numero_elementi);
 
         return equilibrio_partita;
     }

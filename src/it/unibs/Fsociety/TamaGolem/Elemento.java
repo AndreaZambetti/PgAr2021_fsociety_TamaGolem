@@ -21,8 +21,6 @@ public class Elemento {
     private static final int minimo = 0;
 
     private String nome;
-    private ArrayList <String> elementi_deboli;
-    private ArrayList <String> elementi_forti;
 
     public Elemento(String nome) {
         this.nome = nome;
@@ -32,28 +30,12 @@ public class Elemento {
         this.nome = nome;
     }
 
-    public void setElementi_deboli(ArrayList<String> elementi_deboli) {
-        this.elementi_deboli = elementi_deboli;
-    }
-
-    public void setElementi_forti(ArrayList<String> elementi_forti) {
-        this.elementi_forti = elementi_forti;
-    }
-
     public String getNome() {
         return nome;
     }
 
-    public ArrayList<String> getElementi_deboli() {
-        return elementi_deboli;
-    }
-
-    public ArrayList<String> getElementi_forti() {
-        return elementi_forti;
-    }
-
     //Genera un insieme randomico di indici per la selezione degli elementi
-    public ArrayList<Integer> selezione_random(int numero_elementi){
+    public static ArrayList<Integer> selezione_random(int numero_elementi){
         //Usando un set ci si assicura che ogni numero sia unico
         Set<Integer> lista_codici_elementi = new HashSet<>();
 
@@ -69,7 +51,7 @@ public class Elemento {
         return new ArrayList<Integer>(lista_codici_elementi);
     }
 
-    public HashMap<Integer, Elemento> inizializzaHashMapEquilibrio(int numero_elementi){
+    public static HashMap<Integer, Elemento> inizializzaElementiEquilibrio(int numero_elementi){
         HashMap<Integer, Elemento> nuovo_equilibrio = new HashMap<>();
 
         //Inizializzazione degli elementi.
