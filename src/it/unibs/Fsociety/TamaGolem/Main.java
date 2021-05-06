@@ -8,10 +8,10 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
 
-        int numero_elementi = 9;
+        int numero_elementi = 3;
 
 
-        // crazione del oggetto equilibrio che ti serve per richimare il metodo, che non e static
+        // crazione dell'oggetto equilibrio che ti serve per richimare il metodo, che non e static
         Elemento elemento = new Elemento ("fuoco");
 
         //  crazione del nuovo equlibrio

@@ -21,9 +21,22 @@ public class Elemento {
     private static final int minimo = 0;
 
     private String nome;
+    private HashMap<Integer, Elemento> hashMapElementi;
 
     public Elemento(String nome) {
         this.nome = nome;
+    }
+
+    public Elemento(HashMap<Integer, Elemento> lista) {
+        this.hashMapElementi = lista;
+    }
+
+    public void setHashMapElementi(HashMap<Integer, Elemento> hashMapElementi) {
+        this.hashMapElementi = hashMapElementi;
+    }
+
+    public HashMap<Integer, Elemento> getHashMapElementi() {
+        return hashMapElementi;
     }
 
     public void setNome(String nome) {
@@ -35,7 +48,7 @@ public class Elemento {
     }
 
     //Genera un insieme randomico di indici per la selezione degli elementi
-    public static ArrayList<Integer> selezione_random(int numero_elementi){
+    public ArrayList<Integer> selezione_random(int numero_elementi){
         //Usando un set ci si assicura che ogni numero sia unico
         Set<Integer> lista_codici_elementi = new HashSet<>();
 
