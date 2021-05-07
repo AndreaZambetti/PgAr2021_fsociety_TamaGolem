@@ -22,7 +22,7 @@ public class DriverMatch {
 
         match = new Match(player1, player2 , 2);
 
-        match.scegliLivelloDifficolta();
+        match.scegliLivelloDifficolta(2);
 
         System.out.println(player1.getNome());
         System.out.println(player1.getnGolem());

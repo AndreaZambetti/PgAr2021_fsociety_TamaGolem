@@ -2,8 +2,8 @@ package it.unibs.Fsociety.TamaGolem;
 
 // step uno capire cosa passargli
 public class Match {
-    private String vincitore;
-    private boolean conclusa ;
+    private String vincitore ="";
+    private boolean conclusa  = false ;
     private Giocatore player1;
     private Giocatore player2;
     private int lDifficolta;
@@ -59,53 +59,93 @@ public class Match {
         this.lDifficolta = lDifficolta;
     }
 
+    public int getScortaPietre() {
+        return scortaPietre;
+    }
+
+    public void setScortaPietre(int scortaPietre) {
+        this.scortaPietre = scortaPietre;
+    }
+
+
     // CREAZIONE LIVELLO DIFFICOLTA
     /*
-     * mancano gli elemnti e le pietre di scorta per ogni incontro
      * creazione persona nel main vero
      * manca la vita ( bisogna vedere i valori di potenza di ogni difficolta quando li creeremo  )
      */
 
-    public void scegliLivelloDifficolta( ) {
-            int num ;
+    public void scegliLivelloDifficolta( int lDifficolta) {
 
-        if (lDifficolta == 1) {
-            num = 5;
-            Elemento.creaNuovoEquilibrio( num  );
-            /*player1.setnGolem().npietre = 3;
-            player2.setnGolem().npietre = 3;*/
-            player1.setnGolem(2);
-            player2.setnGolem(2);
+        switch (lDifficolta) {
+            case 1 :
+                scortaPietre = 12;
 
-        } if ( lDifficolta == 2 )  {
-            num = 7;
-            Elemento.creaNuovoEquilibrio( num );
-            /*player1.nGolem.npietre = 4;
-            player2.nGolem.npietre = 4;*/
-            player1.setnGolem(3);
-            player2.setnGolem(3);
+                Elemento.creaNuovoEquilibrio(5);
 
-        }if ( lDifficolta== 3 ){
-            num = 9;
-            Elemento.creaNuovoEquilibrio( num  );
-            /*player1.nGolem.npietre = 5;
-            player2.nGolem.npietre = 5;*/
-            player1.setnGolem(3);
-            player2.setnGolem(3);
+                player1.setnGolem(2);
+                player2.setnGolem(2);
+                for (int i = 0; i < player1.getArray_golem().size(); i++) {
+                    player1.getArray_golem().get(i).setnPietre(3);
+                    player2.getArray_golem().get(i).setnPietre(3);
+                }
+            break;
 
+            case 2:
+                scortaPietre = 24;
+                Elemento.creaNuovoEquilibrio(7);
+                player1.setnGolem(3);
+                player2.setnGolem(3);
+                for (int i = 0; i < player1.getArray_golem().size(); i++) {
+                    player1.getArray_golem().get(i).setnPietre(4);
+                    player2.getArray_golem().get(i).setnPietre(4);
+                }
+            break;
 
+            case 3:
+                scortaPietre = 135;
+                Elemento.creaNuovoEquilibrio(9);
+                player1.setnGolem(3);
+                player2.setnGolem(3);
+                for (int i = 0; i < player1.getArray_golem().size(); i++) {
+                    player1.getArray_golem().get(i).setnPietre(5);
+                    player2.getArray_golem().get(i).setnPietre(5);
+                }
+            break;
         }
 
-
     }
+
+
+
+
+
     // METODO CHE RITORNA IL VINCITORE DELLA PARTITA ( quando il numero di golem e zero)
-    public String vediVincitore ( ){
-        if ( player1.array_golem.size()==0 ){
-            return player2.getNome();
+    // quando la andremo a dichiarare nel main andra richiamata la classe vincitore e se
+    // la classe vincirore e uguale  non e vuota allora pesiste il vincitore e si fermera il ciclo
+    public void vediVincitore ( ) {
+        if (player1.getArray_golem().size() == 0) {
+             vincitore= player1.getNome();
+
         }
-        if ( player2.array_golem.size( )==0  ){
-            return   player1.getNome();
+          if (player2.getArray_golem().size() == 0) {
+             vincitore = player1.getNome();
+
+        }
+
     }
 
+    // METODO CHE VA A CAMBIARE IL TURNO ( cambia turno)
+    public int cambiaTurno(int i  ){
 
+        if ( player1.getArray_golem().get(i).getVita()==0){
+            i++;
+        }
+        if ( player2.getArray_golem().get(i).getVita()== 0){
+            i++;
+        }
+
+        return i;
+    }
 }
+
+
