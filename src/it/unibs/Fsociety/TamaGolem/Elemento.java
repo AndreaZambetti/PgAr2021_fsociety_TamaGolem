@@ -21,22 +21,9 @@ public class Elemento {
     private static final int minimo = 0;
 
     private String nome;
-    private HashMap<Integer, Elemento> hashMapElementi;
 
     public Elemento(String nome) {
         this.nome = nome;
-    }
-
-    public Elemento(HashMap<Integer, Elemento> lista) {
-        this.hashMapElementi = lista;
-    }
-
-    public void setHashMapElementi(HashMap<Integer, Elemento> hashMapElementi) {
-        this.hashMapElementi = hashMapElementi;
-    }
-
-    public HashMap<Integer, Elemento> getHashMapElementi() {
-        return hashMapElementi;
     }
 
     public void setNome(String nome) {
