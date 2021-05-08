@@ -20,22 +20,29 @@ public class Elemento {
     private static final int massimo = 9;
     private static final int minimo = 0;
 
-    private String nome;
+    private String nome_elemento;
 
-    public Elemento(String nome) {
-        this.nome = nome;
+    private HashMap<Integer, String> lista_elementi;
+
+    private HashMap<Integer, Elemento> lista_elementi_alternativa;
+
+    public Elemento(String nome_elemento) {
+        this.nome_elemento = nome_elemento;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Elemento() {}
+
+    public void setNome_elemento(String nome_elemento) {
+        this.nome_elemento = nome_elemento;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNome_elemento() {
+        return nome_elemento;
     }
 
-    //Genera un insieme randomico di indici per la selezione degli elementi
     public ArrayList<Integer> selezione_random(int numero_elementi){
+        //Genera un insieme randomico di indici per la selezione degli elementi
+
         //Usando un set ci si assicura che ogni numero sia unico
         Set<Integer> lista_codici_elementi = new HashSet<>();
 
@@ -51,12 +58,9 @@ public class Elemento {
         return new ArrayList<Integer>(lista_codici_elementi);
     }
 
-    public  HashMap<Integer, Elemento> inizializzaElementiEquilibrio(int numero_elementi){
-        HashMap<Integer, Elemento> nuovo_equilibrio = new HashMap<>();
-
-        //Inizializzazione degli elementi.
-        //Cercare di rimuoverlo da questo metodo poiché in caso di utilizzo
-        //del programma per più partite può causare inutili operazioni extra.
+    public static void riempi_tutti_elementi(){
+        //Inizializzazione degli elementi in un HashMap di riferimento,
+        // chiamare questa funzione una volta all'avvio del programma nel Main.
         tutti_elementi.put(0, elemento_acido);
         tutti_elementi.put(1, elemento_acqua);
         tutti_elementi.put(2, elemento_aria);
@@ -66,6 +70,10 @@ public class Elemento {
         tutti_elementi.put(6, elemento_radioso);
         tutti_elementi.put(7, elemento_terra);
         tutti_elementi.put(8, elemento_tuono);
+    }
+
+    public  HashMap<Integer, Elemento> inizializzaElementiEquilibrio(int numero_elementi){
+        HashMap<Integer, Elemento> nuovo_equilibrio = new HashMap<>();
 
         /*Selezione di un numero di elementi casuali richiesti.
           La selezione avviene attraverso i key dell'HashMap.*/

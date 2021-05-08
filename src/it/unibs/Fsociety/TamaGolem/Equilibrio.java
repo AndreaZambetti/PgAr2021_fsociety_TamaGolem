@@ -6,26 +6,20 @@ public class Equilibrio {
 
     private HashMap<Integer, Elemento> elementi_equilibrio;
 
-    /*public Equilibrio(String nome) {
-        super(nome);
-    }*/
-
-    public Equilibrio(HashMap<Integer, Elemento> elementi_partita) {
-        this.elementi_equilibrio = elementi_partita;
+    public Equilibrio(HashMap<Integer, Elemento> elementi_equilibrio) {
+        this.elementi_equilibrio = elementi_equilibrio;
     }
+
+    public Equilibrio() { }
 
     public HashMap<Integer, Elemento> getElementi_equilibrio() {
         return elementi_equilibrio;
     }
 
-    public void setElementi_equilibrio(HashMap<Integer, Elemento> elementi_equilibrio) {
-        this.elementi_equilibrio = elementi_equilibrio;
-    }
-
     public Equilibrio genera_equilibrio(int numero_elementi){
 
-        // crazione dell'oggetto equilibrio che ti serve per richimare il metodo, che non è static
-        Elemento elemento_di_richiamo = new Elemento ("richiamo");
+        //crazione dell'oggetto Elemento necessario per richimare il metodo di creazione dell'equilibrio
+        Elemento elemento_di_richiamo = new Elemento();
 
         Equilibrio equilibrio_partita = new Equilibrio(elemento_di_richiamo.inizializzaElementiEquilibrio(numero_elementi));
 
