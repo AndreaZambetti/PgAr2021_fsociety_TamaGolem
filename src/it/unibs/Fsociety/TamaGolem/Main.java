@@ -10,7 +10,10 @@ public class Main {
         //chiamare sempre a inizio programma per inizializzare gli elementi
         Elemento.riempi_tutti_elementi();
 
-        int numero_elementi = 4;
+        int numero_elementi = 5;
+
+        Equilibrio equilibrio = new Equilibrio();
+        equilibrio = equilibrio.genera_equilibrio(numero_elementi);
 
         /*Test funzione di creazione equilibrio
         Equilibrio equilibrio = new Equilibrio();

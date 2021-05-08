@@ -40,7 +40,7 @@ public class Elemento {
         return nome_elemento;
     }
 
-    public ArrayList<Integer> selezione_random(int numero_elementi){
+    private ArrayList<Integer> selezione_random(int numero_elementi){
         //Genera un insieme randomico di indici per la selezione degli elementi
 
         //Usando un set ci si assicura che ogni numero sia unico
