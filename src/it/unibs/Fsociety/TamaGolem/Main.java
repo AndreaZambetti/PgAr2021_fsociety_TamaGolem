@@ -13,7 +13,7 @@ public class Main {
         int numero_elementi = 9;
 
         Equilibrio equilibrio = new Equilibrio();
-        equilibrio = equilibrio.genera_equilibrio(numero_elementi);
+        //equilibrio = equilibrio.genera_equilibrio(numero_elementi);
 
         /*Test funzione di creazione equilibrio
         Equilibrio equilibrio = new Equilibrio();
@@ -27,6 +27,21 @@ public class Main {
             }
         } //*/
 
+        /*TEST INTERA GENERAZIONE EQUILIBRIO*/
+        for (int i=0; i<10; i++){
+            equilibrio = equilibrio.genera_equilibrio(numero_elementi);
 
+            for (int j=0; j<equilibrio.getElementi_equilibrio().size(); j++){
+                System.out.println("Indice " + equilibrio.getElementi_equilibrio().get(j).getNome_elemento() + ": " + j);
+            }
+
+            for (int j=0; j<equilibrio.getElementi_equilibrio().size(); j++){
+                for (int k=0; k<equilibrio.getElementi_equilibrio().size(); k++){
+                    //System.out.print(equilibrio.getInterazione_elementi().get_adiacenza(j, k) + " |\t");
+                    System.out.print(String.format("|%3d", equilibrio.getInterazione_elementi().get_adiacenza(j, k)));
+                }
+                System.out.println();
+            }
+        }
     }
 }
