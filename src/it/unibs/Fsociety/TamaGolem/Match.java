@@ -1,5 +1,7 @@
 package it.unibs.Fsociety.TamaGolem;
 
+import java.util.ArrayList;
+
 // step uno capire cosa passargli
 public class Match {
     private String vincitore ="";
@@ -8,6 +10,7 @@ public class Match {
     private Giocatore player2;
     private int lDifficolta;
     private int scortaPietre ;
+    Arraylist<Pietre>array_pietre_scorta = new ArrayList<Pietre>();
 
 
     public Match(Giocatore player1, Giocatore player2, int livelloDiffolta) {
@@ -32,7 +35,7 @@ public class Match {
     }
 
     public void setConclusa(boolean conclusa) {
-        conclusa = conclusa;
+        this.conclusa = conclusa;
     }
 
     public Giocatore getPlayer1() {
@@ -79,9 +82,7 @@ public class Match {
         switch (lDifficolta) {
             case 1 :
                 scortaPietre = 12;
-
                 Elemento.creaNuovoEquilibrio(5);
-
                 player1.setnGolem(2);
                 player2.setnGolem(2);
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
@@ -125,27 +126,35 @@ public class Match {
     public void vediVincitore ( ) {
         if (player1.getArray_golem().size() == 0) {
              vincitore= player1.getNome();
-
         }
           if (player2.getArray_golem().size() == 0) {
              vincitore = player1.getNome();
-
         }
-
     }
 
-    // METODO CHE VA A CAMBIARE IL TURNO ( cambia turno)
-    public int cambiaTurno(int i  ){
+    // METODO CHE VA A CAMBIARE IL GOLEM  (i = golem player 1  j = golem player 2)
+    public void cambiaGolem(int i, int j ){
 
         if ( player1.getArray_golem().get(i).getVita()==0){
             i++;
         }
-        if ( player2.getArray_golem().get(i).getVita()== 0){
-            i++;
+        if ( player2.getArray_golem().get(j).getVita()==0){
+            j++;
         }
-
-        return i;
     }
+
+    // SCEGLIERE LE PIETRE
+
+    public void scegliereLePietre ( ){
+        
+    }
+
+
+
+
+
+
+
 }
 
 
