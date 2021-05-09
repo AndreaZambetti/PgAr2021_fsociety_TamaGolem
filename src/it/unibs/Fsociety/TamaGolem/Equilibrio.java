@@ -36,7 +36,8 @@ public class Equilibrio {
         //Creazione grafo associato agli elementi dell'equilibrio creato
         equilibrio_partita.interazione_elementi = new Grafo(numero_elementi);
 
-
+        //Genera le interazioni tra gli elementi dell'equilibrio
+        equilibrio_partita.interazione_elementi.imposta_interazione_elementi();
 
         return equilibrio_partita;
     }
