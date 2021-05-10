@@ -32,4 +32,10 @@ public class Giocatore {
     public int getnGolem() {
         return this.array_golem.size();
     }
+
+
+
+
+
 }
+

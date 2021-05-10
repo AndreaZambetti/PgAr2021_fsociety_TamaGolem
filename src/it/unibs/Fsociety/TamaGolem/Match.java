@@ -1,6 +1,7 @@
 package it.unibs.Fsociety.TamaGolem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // step uno capire cosa passargli
 public class Match {
@@ -9,8 +10,8 @@ public class Match {
     private Giocatore player1;
     private Giocatore player2;
     private int lDifficolta;
-    private int scortaPietre ;
-    Arraylist<Pietre>array_pietre_scorta = new ArrayList<Pietre>();
+    private Equilibrio creaEquilibrio ;
+    private HashMap<Integer, Elemento> scortaPietre;
 
 
     public Match(Giocatore player1, Giocatore player2, int livelloDiffolta) {
@@ -62,13 +63,7 @@ public class Match {
         this.lDifficolta = lDifficolta;
     }
 
-    public int getScortaPietre() {
-        return scortaPietre;
-    }
 
-    public void setScortaPietre(int scortaPietre) {
-        this.scortaPietre = scortaPietre;
-    }
 
 
     // CREAZIONE LIVELLO DIFFICOLTA
@@ -78,11 +73,20 @@ public class Match {
      */
 
     public void scegliLivelloDifficolta( int lDifficolta) {
-
+        Elemento.riempi_tutti_elementi();
         switch (lDifficolta) {
             case 1 :
-                scortaPietre = 12;
-                Elemento.creaNuovoEquilibrio(5);
+                // 3 pietre per ogni elemento
+                /*scortaPietre = 15;*/
+                creaEquilibrio = creaEquilibrio.genera_equilibrio(5);
+                // come
+                int key;
+                for ( int i = 0 ; i < 5; i++ ){
+                    for ( int  j =0 ; j< 3 ; j++){
+                         key = i *3 +j;
+                        scortaPietre.put( key, creaEquilibrio.getElementi_equilibrio().get(i) );
+                    }
+                }
                 player1.setnGolem(2);
                 player2.setnGolem(2);
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
@@ -92,8 +96,9 @@ public class Match {
             break;
 
             case 2:
-                scortaPietre = 24;
-                Elemento.creaNuovoEquilibrio(7);
+                // 4 pietre per ogni elemento
+                /*scortaPietre = 28;*/
+                 creaEquilibrio = creaEquilibrio.genera_equilibrio(7);
                 player1.setnGolem(3);
                 player2.setnGolem(3);
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
@@ -103,9 +108,10 @@ public class Match {
             break;
 
             case 3:
-                scortaPietre = 135;
-                Elemento.creaNuovoEquilibrio(9);
-                player1.setnGolem(3);
+                // 5 pietre per ogni elemento
+                /*scortaPietre = 45;*/
+                creaEquilibrio = creaEquilibrio.genera_equilibrio(9);
+                player1.setArray_golem();
                 player2.setnGolem(3);
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
                     player1.getArray_golem().get(i).setnPietre(5);
@@ -135,10 +141,10 @@ public class Match {
     // METODO CHE VA A CAMBIARE IL GOLEM  (i = golem player 1  j = golem player 2)
     public void cambiaGolem(int i, int j ){
 
-        if ( player1.getArray_golem().get(i).getVita()==0){
+        if ( player1.getArray_golem().get(i).isMorto()== true){
             i++;
         }
-        if ( player2.getArray_golem().get(j).getVita()==0){
+        if ( player2.getArray_golem().get(j).isMorto()== true){
             j++;
         }
     }
