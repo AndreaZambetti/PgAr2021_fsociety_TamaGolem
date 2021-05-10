@@ -50,7 +50,7 @@ public class Grafo {
              * rappresentato dall'indice i, attraverso i valori presenti nelle colonne
              * della riga di quell'elemento nella matrice_adiacenze:
              * 1) conta quanti infieriscono danno all'elemento
-             * 2) conta quanti infieriscono danno dall'elemento
+             * 2) conta quanti subiscono danno dall'elemento
              * 3) conta quanti devono essere ancora assegnati*/
 
             for (int j=0; j<this.dimensione; j++) {
