@@ -124,17 +124,21 @@ public class Grafo {
             for (int j=0; j<infieriscono.size(); j++){
                 int indice = infieriscono.get(j);
                 this.matrice_adiacenze[i][indice] = (int)(Math.random() * range + minimo_danni);
+                somma_danni_subiti += this.matrice_adiacenze[i][indice];
                 this.matrice_adiacenze[indice][i] = 0;
             }
 
             ArrayList<Integer> subiscono = new ArrayList<Integer>();
             subiscono.addAll(quali_subiscono);
 
-            for (int j=0; j < subiscono.size(); j++){
+            for (int j=0; j < subiscono.size() - 1; j++){
                 int indice = subiscono.get(j);
                 this.matrice_adiacenze[indice][i] = (int)(Math.random() * range + minimo_danni);
+                somma_danni_causati += this.matrice_adiacenze[indice][i];
                 this.matrice_adiacenze[i][indice] = 0;
             }
+
+
 
             /**BILANCIAMENTO DANNI
              * Questa parte di programma ha lo scopo di rendere nulla la differenza dei danni
