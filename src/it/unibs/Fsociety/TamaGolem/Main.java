@@ -31,9 +31,7 @@ public class Main {
         for (int i=0; i<10; i++){
             equilibrio = equilibrio.genera_equilibrio(numero_elementi);
 
-            for (int j=0; j<equilibrio.getElementi_equilibrio().size(); j++){
-                System.out.println("Indice " + equilibrio.getElementi_equilibrio().get(j).getNome_elemento() + ": " + j);
-            }
+            System.out.println("Nuovo test");
 
             for (int j=0; j<equilibrio.getElementi_equilibrio().size(); j++){
                 for (int k=0; k<equilibrio.getElementi_equilibrio().size(); k++){
