@@ -163,7 +163,7 @@ public class Match {
             j++;
         }
     }
-
+// DA FARE
     // SCEGLIERE LE PIETRE stampa pietre e le stampa 
 
     public void scegliereLePietre ( ){
