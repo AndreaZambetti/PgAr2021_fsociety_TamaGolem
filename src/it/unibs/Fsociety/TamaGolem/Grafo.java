@@ -140,39 +140,39 @@ public class Grafo {
              * Questa parte di programma ha lo scopo di rendere nulla la differenza dei danni
              * subiti e causati da un elemento nel caso i due valori non sia già uguali*/
 
-            /**VECCHIA VERSIONE BILANCIAMENTO*/
+            /**VECCHIA VERSIONE BILANCIAMENTO* /
             for (int j = 0; j < this.dimensione; j++) {
                 /*Calcola l'ammontare di danni subiti da un elemento sommando i valori presenti
-                 * nelle caselle della riga che rappresenta l'elemento*/
+                 * nelle caselle della riga che rappresenta l'elemento* /
                 somma_danni_subiti += this.matrice_adiacenze[i][j];
 
                 /*Calcola l'ammontare di danni causati da un elemento sommando i valori presenti
-                 * nelle caselle della colonna che rappresenta l'elemento*/
+                 * nelle caselle della colonna che rappresenta l'elemento* /
                 somma_danni_causati += this.matrice_adiacenze[j][i];
             }
 
-            /*In caso i danni causati siano meno di quelli subiti*/
+            /*In caso i danni causati siano meno di quelli subiti* /
             if (somma_danni_causati < somma_danni_subiti){
                 int selezionato;
                 do {
-                    /*Selezione casuale di un indice*/
+                    /*Selezione casuale di un indice* /
                     selezionato = (int) (Math.random() * this.dimensione);
                 } while((!quali_infieriscono.contains(selezionato)) && (selezionato > i));
 
-                /*Aggiunge la differenza dai danni alla casella selezionata*/
+                /*Aggiunge la differenza dai danni alla casella selezionata* /
                 this.matrice_adiacenze[i][selezionato] += somma_danni_subiti - somma_danni_causati;
             }
-            /*In caso i danni subiti siano meno di quelli causati*/
+            /*In caso i danni subiti siano meno di quelli causati* /
             else if (somma_danni_subiti < somma_danni_causati){
                 int selezionato;
                 do {
-                    /*Selezione casuale di un indice*/
+                    /*Selezione casuale di un indice* /
                     selezionato = (int) (Math.random() * this.dimensione);
                 } while((!quali_subiscono.contains(selezionato)) && (selezionato > i));
 
-                /*Aggiunge la differenza dai danni alla casella selezionata*/
+                /*Aggiunge la differenza dai danni alla casella selezionata* /
                 this.matrice_adiacenze[selezionato][i] += somma_danni_causati - somma_danni_subiti;
-            }
+            }*/
 
 
             /*Svuotare i Set a fine ciclo*/
