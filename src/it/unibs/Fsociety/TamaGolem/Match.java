@@ -79,11 +79,11 @@ public class Match {
                 // 3 pietre per ogni elemento
                 /*scortaPietre = 15;*/
                 creaEquilibrio = creaEquilibrio.genera_equilibrio(5);
-                // come
+                // inserire le pietre di scorta
                 int key;
                 for ( int i = 0 ; i < 5; i++ ){
                     for ( int  j =0 ; j< 3 ; j++){
-                         key = i *3 +j;
+                         key = i *j +j;
                         scortaPietre.put( key, creaEquilibrio.getElementi_equilibrio().get(i) );
                     }
                 }
@@ -98,7 +98,15 @@ public class Match {
             case 2:
                 // 4 pietre per ogni elemento
                 /*scortaPietre = 28;*/
+
                  creaEquilibrio = creaEquilibrio.genera_equilibrio(7);
+                int key;
+                for ( int i = 0 ; i < 7; i++ ){
+                    for ( int  j =0 ; j< 4 ; j++){
+                        key = i *j +j;
+                        scortaPietre.put( key, creaEquilibrio.getElementi_equilibrio().get(i) );
+                    }
+                }
                 player1.setnGolem(3);
                 player2.setnGolem(3);
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
@@ -111,6 +119,13 @@ public class Match {
                 // 5 pietre per ogni elemento
                 /*scortaPietre = 45;*/
                 creaEquilibrio = creaEquilibrio.genera_equilibrio(9);
+                int key;
+                for ( int i = 0 ; i < 9; i++ ){
+                    for ( int  j =0 ; j< 5 ; j++){
+                        key = i *j +j;
+                        scortaPietre.put( key, creaEquilibrio.getElementi_equilibrio().get(i) );
+                    }
+                }
                 player1.setArray_golem();
                 player2.setnGolem(3);
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
@@ -149,10 +164,14 @@ public class Match {
         }
     }
 
-    // SCEGLIERE LE PIETRE
+    // SCEGLIERE LE PIETRE stampa pietre e le stampa 
 
     public void scegliereLePietre ( ){
-        
+        for ( int i =0 ; i< scortaPietre.size(); i++){
+            System.out.println(scortaPietre.get(i));
+
+
+        }
     }
 
 
