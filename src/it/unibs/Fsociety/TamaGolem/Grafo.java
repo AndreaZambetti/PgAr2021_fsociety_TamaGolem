@@ -39,9 +39,11 @@ public class Grafo {
         Set<Integer> quali_infieriscono = new HashSet<>();
         Set<Integer> quali_subiscono = new HashSet<>();
         Set<Integer> casi_da_assegnare = new HashSet<>();
-        int quoziente_casuale;
-        int somma_danni_subiti = 0;
-        int somma_danni_causati = 0;
+        ArrayList<Integer> infieriscono = new ArrayList<Integer>();
+        ArrayList<Integer> subiscono = new ArrayList<Integer>();
+        //int quoziente_casuale;
+        //int somma_danni_subiti = 0;
+        //int somma_danni_causati = 0;
 
         for (int i=0; i<this.dimensione; i++){
 
@@ -69,6 +71,60 @@ public class Grafo {
                 }
             }
 
+            if (!quali_infieriscono.isEmpty()){
+                infieriscono.addAll(quali_infieriscono);
+                for (int j = 0; j < quali_infieriscono.size() && !casi_da_assegnare.isEmpty(); j++){
+                    int selezionato;
+                    do {
+                            /*Selezione casuale di un indice*/
+                            selezionato = (int) (Math.random() * this.dimensione);
+                        } while(!casi_da_assegnare.contains(selezionato));
+
+                    this.matrice_adiacenze[selezionato][i] = this.matrice_adiacenze[i][infieriscono.get(j)];
+                    this.matrice_adiacenze[i][selezionato] = 0;
+                    casi_da_assegnare.remove(selezionato);
+                }
+            }
+
+            if (!quali_subiscono.isEmpty()){
+                subiscono.addAll(quali_subiscono);
+                for (int j = 0; j < quali_subiscono.size() && !casi_da_assegnare.isEmpty(); j++){
+                    int selezionato;
+                    do {
+                        /*Selezione casuale di un indice*/
+                        selezionato = (int) (Math.random() * this.dimensione);
+                    } while(!casi_da_assegnare.contains(selezionato));
+
+                    this.matrice_adiacenze[i][selezionato] = this.matrice_adiacenze[subiscono.get(j)][i];
+                    this.matrice_adiacenze[selezionato][i] = 0;
+                    casi_da_assegnare.remove(selezionato);
+                }
+            }
+
+            int cicli = casi_da_assegnare.size() / 2;
+            for (int j=0; j<cicli; j++){
+                int primo_selezionato, secondo_selezionato;
+                do {
+                    /*Selezione casuale di un indice*/
+                    primo_selezionato = (int) (Math.random() * this.dimensione);
+                } while(!casi_da_assegnare.contains(primo_selezionato));
+
+                this.matrice_adiacenze[i][primo_selezionato] = (int)(Math.random() * range + minimo_danni);;
+                this.matrice_adiacenze[primo_selezionato][i] = 0;
+                casi_da_assegnare.remove(primo_selezionato);
+
+                do {
+                    /*Selezione casuale di un indice*/
+                    secondo_selezionato = (int) (Math.random() * this.dimensione);
+                } while(!casi_da_assegnare.contains(secondo_selezionato));
+
+                this.matrice_adiacenze[secondo_selezionato][i] = this.matrice_adiacenze[i][primo_selezionato];
+                this.matrice_adiacenze[i][secondo_selezionato] = 0;
+                casi_da_assegnare.remove(secondo_selezionato);
+            }
+
+
+
             /**ASSEGNA GRUPPI APPARTENENZA INDICI
              * Questa parte di programma da un'assegnazione alle adiacenze che ancora non la possiedono,
              * tali adiacenze sono state precedentemente inserite nel Set casi_da_assegnare,
@@ -76,9 +132,9 @@ public class Grafo {
 
             /*Viene generato un quoziente casuale per decidere randomicamente
              * quanti elementi andranno a formare i set, il quoziente può valere da 2 a 5*/
-            quoziente_casuale = (int) (Math.random() * 4 + 2);
+            /*quoziente_casuale = (int) (Math.random() * 4 + 2);
 
-            /*In caso ci siano adiacenze da assegnare*/
+            /*In caso ci siano adiacenze da assegnare* /
             if (!casi_da_assegnare.isEmpty()){
                 int assegnare = casi_da_assegnare.size();
                 for (int j = 0; j < assegnare; j++){
@@ -86,7 +142,7 @@ public class Grafo {
                     if (j % quoziente_casuale == 0){
                         int selezionato;
                         do {
-                            /*Selezione casuale di un indice*/
+                            /*Selezione casuale di un indice* /
                             selezionato = (int) (Math.random() * this.dimensione);
                         } while(!casi_da_assegnare.contains(selezionato));
                         /*La condizione che l'indice sia presente nell'elenco dovrebbe essere
@@ -94,14 +150,14 @@ public class Grafo {
                         * che possa essere causa di problemi in fase di test*/
 
                         /*L'elemento viene aggiunto a quelli che infieriscono e viene rimosso
-                        * da quelli da assegnare*/
+                        * da quelli da assegnare* /
                         quali_infieriscono.add(selezionato);
                         casi_da_assegnare.remove(selezionato);
                     }
                     else{
                         int selezionato;
                         do {
-                            /*Selezione casuale di un indice*/
+                            /*Selezione casuale di un indice* /
                             selezionato = (int) (Math.random() * this.dimensione);
                         } while(!casi_da_assegnare.contains(selezionato));
                         /*La condizione che l'indice sia presente nell'elenco dovrebbe essere
@@ -109,14 +165,14 @@ public class Grafo {
                          * che possa essere causa di problemi in fase di test*/
 
                         /*L'elemento viene aggiunto a quelli che infieriscono e viene rimosso
-                         * da quelli da assegnare*/
+                         * da quelli da assegnare* /
                         quali_subiscono.add(selezionato);
                         casi_da_assegnare.remove(selezionato);
                     }
                 }
             }
 
-            /***/
+
 
             ArrayList<Integer> infieriscono = new ArrayList<Integer>();
             infieriscono.addAll(quali_infieriscono);
@@ -136,9 +192,7 @@ public class Grafo {
                 this.matrice_adiacenze[indice][i] = (int)(Math.random() * range + minimo_danni);
                 somma_danni_causati += this.matrice_adiacenze[indice][i];
                 this.matrice_adiacenze[i][indice] = 0;
-            }
-
-
+            }*/
 
             /**BILANCIAMENTO DANNI
              * Questa parte di programma ha lo scopo di rendere nulla la differenza dei danni
@@ -179,13 +233,14 @@ public class Grafo {
             }*/
 
 
+
             /*Svuotare i Set a fine ciclo*/
             quali_infieriscono.clear();
             quali_subiscono.clear();
             infieriscono.clear();
             subiscono.clear();
-            somma_danni_subiti = 0;
-            somma_danni_causati = 0;
+            //somma_danni_subiti = 0;
+            //somma_danni_causati = 0;
         }
     }
 }

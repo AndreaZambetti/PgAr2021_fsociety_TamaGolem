@@ -9,7 +9,7 @@ public class Main {
         //Chiamare sempre a inizio programma per inizializzare gli elementi
         Elemento.riempi_tutti_elementi();
 
-        int numero_elementi = 9;
+        int numero_elementi = 7;
 
         Equilibrio equilibrio = new Equilibrio();
 
