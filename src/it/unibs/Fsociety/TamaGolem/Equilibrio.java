@@ -25,7 +25,8 @@ public class Equilibrio {
         this.interazione_elementi = interazione_elementi;
     }
 
-    public Equilibrio genera_equilibrio(int numero_elementi) {
+    // inserimento metodo static
+    public static Equilibrio genera_equilibrio(int numero_elementi) {
 
         //Creazione dell'oggetto Elemento necessario per richimare il metodo di creazione dell'equilibrio
         Elemento elemento_di_richiamo = new Elemento();

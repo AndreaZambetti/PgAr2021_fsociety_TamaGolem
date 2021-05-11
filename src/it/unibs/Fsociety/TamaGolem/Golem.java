@@ -6,24 +6,25 @@ public class Golem {
 
     private static final int MAX_VITA = 50;
 
-    private ArrayList <String> pietre = new ArrayList<>();
+    private ArrayList <Elemento> array_elementi = new ArrayList<>();
     private String nome;
-    private int vita;
-    private boolean morto;
+    private int vita ;
+    private boolean morto =  false;
+    private int  nPietre ;
 
-    public Golem(ArrayList<String> pietre, String nome) {
-        this.pietre = pietre;
+    public Golem(/*ArrayList<String> pietre, */ String nome) {
+        /*this.pietre = pietre;*/
         this.nome = nome;
         this.setVita(MAX_VITA);
         this.setMorto(false);
     }
 
-    public ArrayList<String> getPietre() {
-        return pietre;
+    public ArrayList<Elemento> getArray_elementi() {
+        return array_elementi;
     }
 
-    public void setPietre(ArrayList<String> pietre) {
-        this.pietre = pietre;
+    public void setArray_elementi(ArrayList<Elemento> array_elementi) {
+        this.array_elementi = array_elementi;
     }
 
     public String getNome() {
@@ -38,6 +39,14 @@ public class Golem {
         return vita;
     }
 
+    public int getnPietre() {
+        return nPietre;
+    }
+
+    public void setnPietre(int nPietre) {
+        this.nPietre = nPietre;
+    }
+
     public void setVita(int vita) {
         if(vita <= 0) {
             this.vita = 0;
@@ -49,7 +58,7 @@ public class Golem {
     }
 
     public int getNumeroPietre() {
-        return this.pietre.size();
+        return this.array_elementi.size();
     }
 
     public void setMorto(boolean morto) {
@@ -66,6 +75,10 @@ public class Golem {
         this.setVita(this.vita - danno);
         return this.vita;
     }
+
+
+
+
 
 
 
