@@ -42,10 +42,11 @@ public class Grafo {
         ArrayList<Integer> infieriscono = new ArrayList<Integer>();
         ArrayList<Integer> subiscono = new ArrayList<Integer>();
         //int quoziente_casuale;
-        //int somma_danni_subiti = 0;
-        //int somma_danni_causati = 0;
+        int somma_danni_subiti = 0;
+        int somma_danni_causati = 0;
+        int aggiungi;
 
-        for (int i=0; i<this.dimensione; i++){
+        for (int i=0; i < this.dimensione; i++){
 
             /**CONTROLLA STATO ADIACENZE
              * Controlla la condizione degli elementi rispetto a uno preso in analisi,
@@ -76,9 +77,9 @@ public class Grafo {
                 for (int j = 0; j < quali_infieriscono.size() && !casi_da_assegnare.isEmpty(); j++){
                     int selezionato;
                     do {
-                            /*Selezione casuale di un indice*/
-                            selezionato = (int) (Math.random() * this.dimensione);
-                        } while(!casi_da_assegnare.contains(selezionato));
+                        /*Selezione casuale di un indice*/
+                        selezionato = (int) (Math.random() * this.dimensione);
+                    } while(!casi_da_assegnare.contains(selezionato));
 
                     this.matrice_adiacenze[selezionato][i] = this.matrice_adiacenze[i][infieriscono.get(j)];
                     this.matrice_adiacenze[i][selezionato] = 0;
@@ -101,27 +102,32 @@ public class Grafo {
                 }
             }
 
+
+            /**RIEMPIMENTO PRIMA META' MATRICE*/
+
+
             int cicli = casi_da_assegnare.size() / 2;
-            for (int j=0; j<cicli; j++){
+            for (int j = 0; j < cicli; j++) {
                 int primo_selezionato, secondo_selezionato;
                 do {
                     /*Selezione casuale di un indice*/
                     primo_selezionato = (int) (Math.random() * this.dimensione);
-                } while(!casi_da_assegnare.contains(primo_selezionato));
+                } while (!casi_da_assegnare.contains(primo_selezionato));
 
-                this.matrice_adiacenze[i][primo_selezionato] = (int)(Math.random() * range + minimo_danni);;
+                this.matrice_adiacenze[i][primo_selezionato] = (int) (Math.random() * range + minimo_danni);
                 this.matrice_adiacenze[primo_selezionato][i] = 0;
                 casi_da_assegnare.remove(primo_selezionato);
 
                 do {
                     /*Selezione casuale di un indice*/
                     secondo_selezionato = (int) (Math.random() * this.dimensione);
-                } while(!casi_da_assegnare.contains(secondo_selezionato));
+                } while (!casi_da_assegnare.contains(secondo_selezionato));
 
                 this.matrice_adiacenze[secondo_selezionato][i] = this.matrice_adiacenze[i][primo_selezionato];
                 this.matrice_adiacenze[i][secondo_selezionato] = 0;
                 casi_da_assegnare.remove(secondo_selezionato);
             }
+
 
 
 

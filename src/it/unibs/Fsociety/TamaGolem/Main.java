@@ -21,7 +21,6 @@ public class Main {
 
             for (int j=0; j<equilibrio.getElementi_equilibrio().size(); j++){
                 for (int k=0; k<equilibrio.getElementi_equilibrio().size(); k++){
-                    //System.out.print(equilibrio.getInterazione_elementi().get_adiacenza(j, k) + " |\t");
                     System.out.print(String.format("|%3d", equilibrio.getInterazione_elementi().get_adiacenza(j, k)));
                 }
                 System.out.println();
