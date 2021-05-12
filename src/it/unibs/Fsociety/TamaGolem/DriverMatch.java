@@ -1,7 +1,5 @@
 package it.unibs.Fsociety.TamaGolem;
 
-import it.unibs.fp.mylib.InputDati;
-
 public class DriverMatch {
 
     public static void main(String[] args) {
@@ -28,8 +26,8 @@ public class DriverMatch {
         match.scegliLivelloDifficolta(2);
 
         // visualizzazione delle pietre di scorta
-        match.scegliereLePietre(1);
 
+        match.evoluzione(0);
 
 
 

@@ -83,7 +83,6 @@ public class Elemento {
         for (int i=0; i<numero_elementi; i++){
             nuovo_equilibrio.put(i, tutti_elementi.get(indici_elementi_random.get(i)));
         }
-
         return nuovo_equilibrio;
     }
 }

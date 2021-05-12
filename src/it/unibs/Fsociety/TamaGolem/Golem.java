@@ -10,7 +10,7 @@ public class Golem {
     private String nome;
     private int vita ;
     private boolean morto =  false;
-    private int  nPietre ;
+
 
     public Golem(/*ArrayList<String> pietre, */ String nome) {
         /*this.pietre = pietre;*/
@@ -39,13 +39,7 @@ public class Golem {
         return vita;
     }
 
-    public int getnPietre() {
-        return nPietre;
-    }
 
-    public void setnPietre(int nPietre) {
-        this.nPietre = nPietre;
-    }
 
     public void setVita(int vita) {
         if(vita <= 0) {
@@ -75,6 +69,7 @@ public class Golem {
         this.setVita(this.vita - danno);
         return this.vita;
     }
+
 
 
 
