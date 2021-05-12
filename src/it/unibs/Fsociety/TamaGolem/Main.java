@@ -13,7 +13,10 @@ public class Main {
 
         Equilibrio equilibrio = new Equilibrio();
 
-        /*TEST INTERA GENERAZIONE EQUILIBRIO*/
+        int somma_riga = 0;
+        int somma_colonna = 0;
+
+        //10 TEST INTERA GENERAZIONE EQUILIBRIO
         for (int i=0; i<10; i++){
             equilibrio = equilibrio.genera_equilibrio(numero_elementi);
 
@@ -21,10 +24,29 @@ public class Main {
 
             for (int j=0; j<equilibrio.getElementi_equilibrio().size(); j++){
                 for (int k=0; k<equilibrio.getElementi_equilibrio().size(); k++){
-                    System.out.print(String.format("|%3d", equilibrio.getInterazione_elementi().get_adiacenza(j, k)));
+                    System.out.print(String.format("|%2d|", equilibrio.getInterazione_elementi().get_adiacenza(j, k)));
+                    somma_riga += equilibrio.getInterazione_elementi().get_adiacenza(j, k);
                 }
-                System.out.println();
+                System.out.println(String.format(" -> %d", somma_riga));
+                somma_riga = 0;
             }
+
+            System.out.print("  |");
+            for (int j=0; j < equilibrio.getElementi_equilibrio().size() - 1; j++){
+                System.out.print("   |");
+            }
+
+            System.out.println();
+
+            for (int j=0; j < equilibrio.getElementi_equilibrio().size(); j++){
+                for (int k=0; k<equilibrio.getElementi_equilibrio().size(); k++){
+                    somma_colonna += equilibrio.getInterazione_elementi().get_adiacenza(k, j);
+                }
+                System.out.print(String.format("|%2d|", somma_colonna));
+                somma_colonna = 0;
+            }
+
+            System.out.println("\n");
         }
     }
 }

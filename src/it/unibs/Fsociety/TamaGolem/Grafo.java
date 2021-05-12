@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Grafo {
 
-    private static int range = 6;
+    private static int range = 5;
     private static int minimo_danni = 1;
 
     private int dimensione;
@@ -36,15 +36,14 @@ public class Grafo {
 
     public void imposta_interazione_elementi(){
 
-        Set<Integer> quali_infieriscono = new HashSet<>();
-        Set<Integer> quali_subiscono = new HashSet<>();
+        //Set<Integer> quali_infieriscono = new HashSet<>();
+        //Set<Integer> quali_subiscono = new HashSet<>();
         Set<Integer> casi_da_assegnare = new HashSet<>();
-        ArrayList<Integer> infieriscono = new ArrayList<Integer>();
-        ArrayList<Integer> subiscono = new ArrayList<Integer>();
-        //int quoziente_casuale;
+        int riga_ultimo_inserimento = 0;
+        int colonna_ultimo_inserimento = 0;
         int somma_danni_subiti = 0;
         int somma_danni_causati = 0;
-        int aggiungi;
+        int selezionato = 0;
 
         for (int i=0; i < this.dimensione; i++){
 
@@ -57,7 +56,9 @@ public class Grafo {
              * 3) conta quanti devono essere ancora assegnati*/
 
             for (int j=0; j<this.dimensione; j++) {
-                switch (this.matrice_adiacenze[i][j]){
+                if (this.matrice_adiacenze[i][j] == -1)
+                    casi_da_assegnare.add(j);
+                /*switch (this.matrice_adiacenze[i][j]){
                     case 0:
                         //L'elemento stesso non deve essere considerato tra quelli che infieriscono
                         if (i!=j)
@@ -69,15 +70,54 @@ public class Grafo {
                     default:
                         quali_infieriscono.add(j);
                         break;
-                }
+                }*/
             }
+
+
+            /**All'inizio del riempimento dei valori di un elemento verifica la possibile differenza
+             * tra i danni subiti e causati, in caso vi sia l'equilibrio viene ristabilito
+             * assegnando a una delle adiacenze vacanti il valore della differenza tra i danni*/
+
+            for (int j = 0; j < i; j++){
+                somma_danni_causati += this.matrice_adiacenze[j][i];
+                somma_danni_subiti += this.matrice_adiacenze[i][j];
+            }
+
+            //In caso si debba aumentare i danni causati
+            if (somma_danni_causati < somma_danni_subiti){
+                do {
+                    /*Selezione casuale di un indice*/
+                    selezionato = (int) (Math.random() * this.dimensione);
+                } while(!casi_da_assegnare.contains(selezionato));
+
+                this.matrice_adiacenze[selezionato][i] = somma_danni_subiti - somma_danni_causati;
+                this.matrice_adiacenze[i][selezionato] = 0;
+                casi_da_assegnare.remove(selezionato);
+                riga_ultimo_inserimento = selezionato;
+                colonna_ultimo_inserimento = i;
+
+            } //In caso si debba aumentare i danni subiti
+            else if (somma_danni_subiti < somma_danni_causati){
+                do {
+                    /*Selezione casuale di un indice*/
+                    selezionato = (int) (Math.random() * this.dimensione);
+                } while(!casi_da_assegnare.contains(selezionato));
+
+                this.matrice_adiacenze[selezionato][i] = 0;
+                this.matrice_adiacenze[i][selezionato] = somma_danni_causati - somma_danni_subiti;
+                casi_da_assegnare.remove(selezionato);
+                riga_ultimo_inserimento = i;
+                colonna_ultimo_inserimento = selezionato;
+            }
+
+            /**
 
             if (!quali_infieriscono.isEmpty()){
                 infieriscono.addAll(quali_infieriscono);
                 for (int j = 0; j < quali_infieriscono.size() && !casi_da_assegnare.isEmpty(); j++){
                     int selezionato;
                     do {
-                        /*Selezione casuale di un indice*/
+                        /*Selezione casuale di un indice* /
                         selezionato = (int) (Math.random() * this.dimensione);
                     } while(!casi_da_assegnare.contains(selezionato));
 
@@ -85,14 +125,16 @@ public class Grafo {
                     this.matrice_adiacenze[i][selezionato] = 0;
                     casi_da_assegnare.remove(selezionato);
                 }
-            }
+            }*/
+
+            /**
 
             if (!quali_subiscono.isEmpty()){
                 subiscono.addAll(quali_subiscono);
                 for (int j = 0; j < quali_subiscono.size() && !casi_da_assegnare.isEmpty(); j++){
                     int selezionato;
                     do {
-                        /*Selezione casuale di un indice*/
+                        /*Selezione casuale di un indice* /
                         selezionato = (int) (Math.random() * this.dimensione);
                     } while(!casi_da_assegnare.contains(selezionato));
 
@@ -100,14 +142,12 @@ public class Grafo {
                     this.matrice_adiacenze[selezionato][i] = 0;
                     casi_da_assegnare.remove(selezionato);
                 }
-            }
+            }*/
 
 
-            /**RIEMPIMENTO PRIMA META' MATRICE*/
+            /**Riempie i casi da assegnare finché sono più di uno*/
 
-
-            int cicli = casi_da_assegnare.size() / 2;
-            for (int j = 0; j < cicli; j++) {
+            while (casi_da_assegnare.size() > 1){
                 int primo_selezionato, secondo_selezionato;
                 do {
                     /*Selezione casuale di un indice*/
@@ -126,127 +166,30 @@ public class Grafo {
                 this.matrice_adiacenze[secondo_selezionato][i] = this.matrice_adiacenze[i][primo_selezionato];
                 this.matrice_adiacenze[i][secondo_selezionato] = 0;
                 casi_da_assegnare.remove(secondo_selezionato);
+                riga_ultimo_inserimento = selezionato;
+                colonna_ultimo_inserimento = i;
             }
 
 
-
-
-            /**ASSEGNA GRUPPI APPARTENENZA INDICI
-             * Questa parte di programma da un'assegnazione alle adiacenze che ancora non la possiedono,
-             * tali adiacenze sono state precedentemente inserite nel Set casi_da_assegnare,
-             * di conseguenza sono facilmente individuabili*/
-
-            /*Viene generato un quoziente casuale per decidere randomicamente
-             * quanti elementi andranno a formare i set, il quoziente può valere da 2 a 5*/
-            /*quoziente_casuale = (int) (Math.random() * 4 + 2);
-
-            /*In caso ci siano adiacenze da assegnare* /
-            if (!casi_da_assegnare.isEmpty()){
-                int assegnare = casi_da_assegnare.size();
-                for (int j = 0; j < assegnare; j++){
-
-                    if (j % quoziente_casuale == 0){
-                        int selezionato;
-                        do {
-                            /*Selezione casuale di un indice* /
-                            selezionato = (int) (Math.random() * this.dimensione);
-                        } while(!casi_da_assegnare.contains(selezionato));
-                        /*La condizione che l'indice sia presente nell'elenco dovrebbe essere
-                        * sufficiente alla corretta assegnazione, tenere comunque conto del fatto
-                        * che possa essere causa di problemi in fase di test*/
-
-                        /*L'elemento viene aggiunto a quelli che infieriscono e viene rimosso
-                        * da quelli da assegnare* /
-                        quali_infieriscono.add(selezionato);
-                        casi_da_assegnare.remove(selezionato);
-                    }
-                    else{
-                        int selezionato;
-                        do {
-                            /*Selezione casuale di un indice* /
-                            selezionato = (int) (Math.random() * this.dimensione);
-                        } while(!casi_da_assegnare.contains(selezionato));
-                        /*La condizione che l'indice sia presente nell'elenco dovrebbe essere
-                         * sufficiente alla corretta assegnazione, tenere comunque conto del fatto
-                         * che possa essere causa di problemi in fase di test*/
-
-                        /*L'elemento viene aggiunto a quelli che infieriscono e viene rimosso
-                         * da quelli da assegnare* /
-                        quali_subiscono.add(selezionato);
-                        casi_da_assegnare.remove(selezionato);
-                    }
-                }
-            }
-
-
-
-            ArrayList<Integer> infieriscono = new ArrayList<Integer>();
-            infieriscono.addAll(quali_infieriscono);
-
-            for (int j=0; j<infieriscono.size(); j++){
-                int indice = infieriscono.get(j);
-                this.matrice_adiacenze[i][indice] = (int)(Math.random() * range + minimo_danni);
-                somma_danni_subiti += this.matrice_adiacenze[i][indice];
-                this.matrice_adiacenze[indice][i] = 0;
-            }
-
-            ArrayList<Integer> subiscono = new ArrayList<Integer>();
-            subiscono.addAll(quali_subiscono);
-
-            for (int j=0; j < subiscono.size() - 1; j++){
-                int indice = subiscono.get(j);
-                this.matrice_adiacenze[indice][i] = (int)(Math.random() * range + minimo_danni);
-                somma_danni_causati += this.matrice_adiacenze[indice][i];
-                this.matrice_adiacenze[i][indice] = 0;
-            }*/
-
-            /**BILANCIAMENTO DANNI
-             * Questa parte di programma ha lo scopo di rendere nulla la differenza dei danni
-             * subiti e causati da un elemento nel caso i due valori non sia già uguali*/
-
-            /**VECCHIA VERSIONE BILANCIAMENTO* /
-            for (int j = 0; j < this.dimensione; j++) {
-                /*Calcola l'ammontare di danni subiti da un elemento sommando i valori presenti
-                 * nelle caselle della riga che rappresenta l'elemento* /
-                somma_danni_subiti += this.matrice_adiacenze[i][j];
-
-                /*Calcola l'ammontare di danni causati da un elemento sommando i valori presenti
-                 * nelle caselle della colonna che rappresenta l'elemento* /
-                somma_danni_causati += this.matrice_adiacenze[j][i];
-            }
-
-            /*In caso i danni causati siano meno di quelli subiti* /
-            if (somma_danni_causati < somma_danni_subiti){
-                int selezionato;
+            if (casi_da_assegnare.size() == 1){
                 do {
-                    /*Selezione casuale di un indice* /
+                    /*Selezione casuale di un indice*/
                     selezionato = (int) (Math.random() * this.dimensione);
-                } while((!quali_infieriscono.contains(selezionato)) && (selezionato > i));
+                } while(!casi_da_assegnare.contains(selezionato));
 
-                /*Aggiunge la differenza dai danni alla casella selezionata* /
-                this.matrice_adiacenze[i][selezionato] += somma_danni_subiti - somma_danni_causati;
+                this.matrice_adiacenze[i][selezionato] = (int) (Math.random() * range + minimo_danni);
+                this.matrice_adiacenze[selezionato][i] = 0;
+                casi_da_assegnare.remove(selezionato);
+
+                //ERRORE NELL'INSERIMENTO NELL'ULTIMA CASELLA USATA
+                this.matrice_adiacenze[riga_ultimo_inserimento][colonna_ultimo_inserimento] += this.matrice_adiacenze[i][selezionato];
             }
-            /*In caso i danni subiti siano meno di quelli causati* /
-            else if (somma_danni_subiti < somma_danni_causati){
-                int selezionato;
-                do {
-                    /*Selezione casuale di un indice* /
-                    selezionato = (int) (Math.random() * this.dimensione);
-                } while((!quali_subiscono.contains(selezionato)) && (selezionato > i));
-
-                /*Aggiunge la differenza dai danni alla casella selezionata* /
-                this.matrice_adiacenze[selezionato][i] += somma_danni_causati - somma_danni_subiti;
-            }*/
-
-
 
             /*Svuotare i Set a fine ciclo*/
-            quali_infieriscono.clear();
-            quali_subiscono.clear();
-            infieriscono.clear();
-            subiscono.clear();
-            //somma_danni_subiti = 0;
-            //somma_danni_causati = 0;
+            //quali_infieriscono.clear();
+            //quali_subiscono.clear();
+            somma_danni_subiti = 0;
+            somma_danni_causati = 0;
         }
     }
 }
