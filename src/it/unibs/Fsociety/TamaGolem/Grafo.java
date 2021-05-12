@@ -55,23 +55,9 @@ public class Grafo {
              * 2) conta quanti subiscono danno dall'elemento
              * 3) conta quanti devono essere ancora assegnati*/
 
-            for (int j=0; j<this.dimensione; j++) {
+            for (int j=0; j<this.dimensione; j++)
                 if (this.matrice_adiacenze[i][j] == -1)
                     casi_da_assegnare.add(j);
-                /*switch (this.matrice_adiacenze[i][j]){
-                    case 0:
-                        //L'elemento stesso non deve essere considerato tra quelli che infieriscono
-                        if (i!=j)
-                            quali_subiscono.add(j);
-                        break;
-                    case -1:
-                        casi_da_assegnare.add(j);
-                        break;
-                    default:
-                        quali_infieriscono.add(j);
-                        break;
-                }*/
-            }
 
 
             /**All'inizio del riempimento dei valori di un elemento verifica la possibile differenza
@@ -173,7 +159,7 @@ public class Grafo {
 
             if (casi_da_assegnare.size() == 1){
                 do {
-                    /*Selezione casuale di un indice*/
+                    //Selezione casuale di un indice
                     selezionato = (int) (Math.random() * this.dimensione);
                 } while(!casi_da_assegnare.contains(selezionato));
 

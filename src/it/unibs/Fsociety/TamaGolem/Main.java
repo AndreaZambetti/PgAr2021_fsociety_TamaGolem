@@ -17,7 +17,6 @@ public class Main {
         int somma_colonna = 0;
 
         //10 TEST INTERA GENERAZIONE EQUILIBRIO
-        for (int i=0; i<10; i++){
             equilibrio = equilibrio.genera_equilibrio(numero_elementi);
 
             System.out.println("Nuovo test");
@@ -48,5 +47,4 @@ public class Main {
 
             System.out.println("\n");
         }
-    }
 }
