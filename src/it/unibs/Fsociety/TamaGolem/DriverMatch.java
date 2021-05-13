@@ -29,8 +29,10 @@ public class DriverMatch {
 
         match.evoluzione(0);
 
+        match.battagliaGolem();
 
 
+        // scelta pietre
 
     }
 }

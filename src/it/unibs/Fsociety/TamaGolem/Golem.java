@@ -70,6 +70,16 @@ public class Golem {
         return this.vita;
     }
 
+    // quando il giocatore  la richiama andiamo a cambiargl lo la pietra
+    public int switchPietre(int i ){
+        i++;
+        if ( i > array_elementi.size()){
+            i=0;
+        }
+
+        return i;
+    }
+
 
 
 
