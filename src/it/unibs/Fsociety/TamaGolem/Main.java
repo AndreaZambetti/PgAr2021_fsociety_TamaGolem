@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        /*
+        //*
 
         //Chiamare sempre a inizio programma per inizializzare gli elementi
         Elemento.riempi_tutti_elementi();
@@ -17,8 +17,10 @@ public class Main {
         int somma_riga = 0;
         int somma_colonna = 0;
 
-
-            equilibrio = equilibrio.genera_equilibrio(numero_elementi);
+        //Esegue 20 test di generazione dell'equilibrio
+        for (int i = 0; i < 20; i++) {
+            //equilibrio = equilibrio.genera_equilibrio(numero_elementi);
+            equilibrio = Equilibrio.genera_equilibrio(numero_elementi);
 
             System.out.println("Nuovo test");
 
@@ -46,6 +48,7 @@ public class Main {
                 somma_colonna = 0;
             }
 
-            System.out.println("\n");*/
-        }
+            System.out.println("\n");
+        }//*/
+    }
 }
