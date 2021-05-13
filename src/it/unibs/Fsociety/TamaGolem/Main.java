@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        //*
+        /*
 
         //Chiamare sempre a inizio programma per inizializzare gli elementi
         Elemento.riempi_tutti_elementi();
