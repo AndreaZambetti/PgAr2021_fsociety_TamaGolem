@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Golem {
 
-    private static final int MAX_VITA = 50;
+    private static final int MAX_VITA = 30;
 
     private ArrayList <Elemento> array_elementi;
     private String nome;

@@ -18,14 +18,12 @@ public class Match {
             "3) difficile (9 elementi)\n" +
             "Insersci il livello di difficolta che preferisci: ";
 
-
     private boolean conclusa = false;
     private Giocatore player1;
     private Giocatore player2;
     private int lDifficolta;
     private Equilibrio equilibrio;
     private ArrayList<Elemento> scortaPietre;
-
 
     public Match() {
 
@@ -95,12 +93,6 @@ public class Match {
     public void setScortaPietre(ArrayList<Elemento> scortaPietre) {
         this.scortaPietre = scortaPietre;
     }
-
-    // CREAZIONE LIVELLO DIFFICOLTA
-    /*
-     * creazione persona nel main vero
-     * manca la vita ( bisogna vedere i valori di potenza di ogni difficolta quando li creeremo  )
-     */
 
     public void scegliLivelloDifficolta(int lDifficolta) {
         Elemento.riempi_tutti_elementi();
@@ -181,7 +173,6 @@ public class Match {
 
     }
 
-
     // METODO CHE STAMPA IL VINCITORE DELLA PARTITA ( quando il numero di golem è zero)
     // quando la andremo a dichiarare nel main andra richiamata la classe vincitore e se
     // la classe vincirore e uguale  non e vuota allora persiste il vincitore e si fermera il ciclo
@@ -198,7 +189,6 @@ public class Match {
                     player1.getNome(), player2.getNome()));
         }
     }
-
 
     public void evoluzione(int golemUtilizzato) {
 
@@ -246,7 +236,6 @@ public class Match {
             }
         }
     }
-
 
     //metodo per l'attacco tra pietre e restituisce il danno
     public void battagliaGolem () {
@@ -334,5 +323,3 @@ public class Match {
         this.getEquilibrio().stampaEquilibrio();
     }
 }
-
-
