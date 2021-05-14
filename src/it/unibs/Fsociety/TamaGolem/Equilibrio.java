@@ -14,6 +14,10 @@ public class Equilibrio {
     public Equilibrio() {
     }
 
+    public String getNomeElementoEquilibrio(int index){
+        return this.getElementi_equilibrio().get(index).getNome_elemento();
+    }
+
     public Grafo getInterazione_elementi() {
         return interazione_elementi;
     }

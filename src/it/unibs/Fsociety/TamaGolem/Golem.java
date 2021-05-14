@@ -6,13 +6,14 @@ public class Golem {
 
     private static final int MAX_VITA = 50;
 
-    private ArrayList <Elemento> array_elementi = new ArrayList<>();
+    private ArrayList <Elemento> array_elementi;
     private String nome;
     private int vita ;
     private boolean morto =  false;
 
 
-    public Golem(/*ArrayList<String> pietre, */ String nome) {
+    public Golem( String nome) {
+        this.array_elementi = new ArrayList<>();
         /*this.pietre = pietre;*/
         this.nome = nome;
         this.setVita(MAX_VITA);

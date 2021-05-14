@@ -27,20 +27,23 @@ public class Main {
         match = new Match(player1, player2);
         int livello = InputDati.leggiIntero(SCEGLI_IL_LIVELLO_DELLA_PARTITA, 1, 3);
         match.scegliLivelloDifficolta(livello);
-
+        match.evoluzione(0);
         //METODO BATTAGLIA
         do {
             // scelta pietra
-            match.evoluzione(0);
+
             boolean attacco = InputDati.yesOrNo("vuoi attaccare ");
             match.battagliaGolem();
+
             player1.cambiaGolem();
+            match.evoluzione(0);
             player2.cambiaGolem();
+            match.evoluzione(0);
 
         }while (!player1.getArray_golem().isEmpty() && !player2.getArray_golem().isEmpty());
         //visualizza il vincitore
         match.vediVincitore();
-        //equilibrio.stampaEquilibrio();
+        match.getEquilibrio().stampaEquilibrio();
 
 
     }
