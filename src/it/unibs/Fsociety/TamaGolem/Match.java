@@ -19,7 +19,7 @@ public class Match {
     public static final String VITA_DEL_GOLEM = "Vita del golem %s del giocatore %s";
     public static final String SCEGLI_IL_LIVELLO_DELLA_PARTITA = "Scegliete il livello della partita\n" +
             "1) facile (5 elementi)\n" +
-            "2) medio(7 elementi)\n" +
+            "2) medio (7 elementi)\n" +
             "3) difficile (9 elementi)\n" +
             "Insersci il livello di difficolta che preferisci: ";
     public static final String VINITO_DA_S_DEL_GIOCATORE_S = " lo scontro e` stato vinto da %s del giocatore %s";
@@ -118,13 +118,12 @@ public class Match {
                 // 3 pietre per ogni elemento
 
                 equilibrio = Equilibrio.genera_equilibrio(5);
-                int key1;
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 3; j++) {
-                        key1 = i * 3 + j;
                         scortaPietre.add( equilibrio.getElementi_equilibrio().get(i));
                     }
                 }
+
                 player1.setnGolem(2);
                 player2.setnGolem(2);
                 System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE,player1.getNome()));
@@ -141,10 +140,8 @@ public class Match {
                 // 4 pietre per ogni elemento
 
                 equilibrio = Equilibrio.genera_equilibrio(7);
-                int key2;
                 for (int i = 0; i < 7; i++) {
                     for (int j = 0; j < 4; j++) {
-                        key2 = i * 4 + j;
                         scortaPietre.add( equilibrio.getElementi_equilibrio().get(i));
                     }
                 }
@@ -167,10 +164,8 @@ public class Match {
                 // 5 pietre per ogni elemento
 
                 equilibrio = Equilibrio.genera_equilibrio(9);
-                int key3;
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 5; j++) {
-                        key3 = i * 5 + j;
                         scortaPietre.add( equilibrio.getElementi_equilibrio().get(i));
                     }
                 }
@@ -180,7 +175,7 @@ public class Match {
                 player1.creaGolem();
                 System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player2.getNome()));
                 player2.creaGolem();
-//set numero di pietre
+                //set numero di pietre
                 player1.setnPietre(5);
                 player2.setnPietre(5);
 
@@ -381,7 +376,4 @@ public class Match {
         this.vediVincitore();
         this.getEquilibrio().stampaEquilibrio();
     }
-
-
-
 }
