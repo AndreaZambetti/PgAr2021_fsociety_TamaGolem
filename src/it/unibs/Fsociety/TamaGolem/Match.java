@@ -2,23 +2,26 @@ package it.unibs.Fsociety.TamaGolem;
 
 import it.unibs.fp.mylib.InputDati;
 
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 // step uno capire cosa passargli
 public class Match {
-    public static final String ELEMENTI_AGGIUNTI = " elementi aggiunti al %s";
-    public static final String INSERISCI_LA_PIETRA = "inserisci la pietra del %s";
-    public static final String SCEGLI_IL_NUMERO_DELLA_PIETRA = " scegli il numero della pietra ";
-    public static final String INSERISCI_I_GOLEM_DEL_GIOCATORE = " inserisci i %i golem del giocatore %s ";
+    public static final String ELEMENTI_AGGIUNTI = "\n\nquesti sono gli elementi aggiunti al golem %s del giocatore %s";
+    public static final String INSERISCI_LA_PIETRA = "inserisci la pietra di %s";
+    public static final String SCEGLI_IL_NUMERO_DELLA_PIETRA = "scegli il numero della pietra ";
+    public static final String INSERISCI_I_GOLEM_DEL_GIOCATORE = "inserisci i nomi del  golem del giocatore %s ";
+    public static final String PIETRE_RIMASTE_NELLA_SCORTA = "\npietre rimaste nella scorta";
+    public static final String VITA_DEL_GOLEM = "vita del golem %s del giocatore %s";
 
 
-    private String vincitore = "";
     private boolean conclusa = false;
     private Giocatore player1;
     private Giocatore player2;
     private int lDifficolta;
     private Equilibrio equilibrio;
-    private static HashMap<Integer, Elemento> scortaPietre = new HashMap<>();
+    private ArrayList<Elemento> scortaPietre = new ArrayList<>();
 
 
     public Match(Giocatore player1, Giocatore player2) {
@@ -27,15 +30,6 @@ public class Match {
         this.player2 = player2;
 
 
-    }
-
-
-    public String getVincitore() {
-        return vincitore;
-    }
-
-    public void setVincitore(String vincitore) {
-        this.vincitore = vincitore;
     }
 
     public boolean isConclusa() {
@@ -78,14 +72,23 @@ public class Match {
         this.equilibrio = creaEquilibrio;
     }
 
-    public HashMap<Integer, Elemento> getScortaPietre() {
+    public Equilibrio getEquilibrio() {
+        return equilibrio;
+    }
+
+    public void setEquilibrio(Equilibrio equilibrio) {
+        this.equilibrio = equilibrio;
+    }
+
+    public ArrayList<Elemento> getScortaPietre() {
         return scortaPietre;
     }
 
-    public void setScortaPietre(HashMap<Integer, Elemento> scortaPietre) {
+    public void setScortaPietre(ArrayList<Elemento> scortaPietre) {
         this.scortaPietre = scortaPietre;
     }
-// CREAZIONE LIVELLO DIFFICOLTA
+
+    // CREAZIONE LIVELLO DIFFICOLTA
     /*
      * creazione persona nel main vero
      * manca la vita ( bisogna vedere i valori di potenza di ogni difficolta quando li creeremo  )
@@ -103,14 +106,14 @@ public class Match {
                 for (int i = 0; i < 5; i++) {
                     for (int j = 0; j < 3; j++) {
                         key1 = i * 3 + j;
-                        scortaPietre.put(key1, equilibrio.getElementi_equilibrio().get(i));
+                        scortaPietre.add( equilibrio.getElementi_equilibrio().get(i));
                     }
                 }
                 player1.setnGolem(2);
                 player2.setnGolem(2);
-                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player1.getnGolem(), player1.getNome()));
+                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE,player1.getNome()));
                 player1.creaGolem();
-                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player2.getnGolem(), player2.getNome()));
+                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE , player2.getNome()));
                 player2.creaGolem();
                 for (int i = 0; i < player1.getArray_golem().size(); i++) {
                     player1.setnPietre(3);
@@ -126,7 +129,7 @@ public class Match {
                 for (int i = 0; i < 7; i++) {
                     for (int j = 0; j < 4; j++) {
                         key2 = i * 4 + j;
-                        scortaPietre.put(key2, equilibrio.getElementi_equilibrio().get(i));
+                        scortaPietre.add( equilibrio.getElementi_equilibrio().get(i));
                     }
                 }
                 // creazione del numero preciso di golem
@@ -134,9 +137,9 @@ public class Match {
                 player2.setnGolem(3);
                 //creazione golem
 
-                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player1.getnGolem(), player1.getNome()));
+                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player1.getNome()));
                 player1.creaGolem();
-                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player2.getnGolem(), player2.getNome()));
+                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player2.getNome()));
                 player2.creaGolem();
 
                 player1.setnPietre(4);
@@ -152,14 +155,14 @@ public class Match {
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 5; j++) {
                         key3 = i * 5 + j;
-                        scortaPietre.put(key3, equilibrio.getElementi_equilibrio().get(i));
+                        scortaPietre.add( equilibrio.getElementi_equilibrio().get(i));
                     }
                 }
                 player1.setnGolem(4);
                 player2.setnGolem(4);
-                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player1.getnGolem(), player1.getNome()));
+                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player1.getNome()));
                 player1.creaGolem();
-                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player2.getnGolem(), player2.getNome()));
+                System.out.println(String.format(INSERISCI_I_GOLEM_DEL_GIOCATORE, player2.getNome()));
                 player2.creaGolem();
 //set numero di pietre
                 player1.setnPietre(5);
@@ -175,28 +178,21 @@ public class Match {
     // quando la andremo a dichiarare nel main andra richiamata la classe vincitore e se
     // la classe vincirore e uguale  non e vuota allora pesiste il vincitore e si fermera il ciclo
     public void vediVincitore() {
-        if (player1.getArray_golem().size() == 0) {
-            vincitore = player1.getNome();
+        if (player1.getArray_golem().size()<=0) {
+
+            System.out.println(String.format(" il vincitore e %s", player2.getNome()));
+
         }
-        if (player2.getArray_golem().size() == 0) {
-            vincitore = player1.getNome();
+        if (player2.getArray_golem().size()<=0) {
+
+            System.out.println(String.format(" il vincitore e %s", player1.getNome()));
         }
     }
 
 
 
 
-  /*  // METODO CHE VA A CAMBIARE IL GOLEM  (i = golem player 1  j = golem player 2)
-    public void cambiaGolem() {
 
-        if (player1.getArray_golem().get(0).isMorto() == true) {
-            player1.getArray_golem().remove(0);
-
-        }
-        if (player2.getArray_golem().get(0).isMorto() == true) {
-            player2.getArray_golem().remove(0);
-        }
-    }*/
 
 
 // DA FARE
@@ -207,47 +203,52 @@ public class Match {
 
         // aggiunta pietre player 1 se  il golem e senza pietre
         if (player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
-            for (int i : scortaPietre.keySet()) {
-                System.out.println(i + " " + scortaPietre.get(i).getNome_elemento());
+            for (int i = 0 ; i< scortaPietre.size(); i++) {
+                System.out.println(i +" "+ scortaPietre.get(i).getNome_elemento());
             }
             for (int i = 0; i < player1.getnPietre(); i++) {
                 System.out.println(String.format(INSERISCI_LA_PIETRA, player1.getNome()));
-                int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 0, scortaPietre.keySet().size());
+                int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 0,scortaPietre.size()-1);
                 player1.getArray_golem().get(golemUtilizzato).getArray_elementi().add(scortaPietre.get(pietraInserire));
                 scortaPietre.remove(pietraInserire);
 
                 //stampa
-                System.out.println(String.format(ELEMENTI_AGGIUNTI, player1.getNome()));
+                System.out.println(String.format(ELEMENTI_AGGIUNTI, player1.getArray_golem().get(0).getNome(), player1.getNome()));
                 for (int j = 0; j < player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size(); j++) {
                     System.out.println(player1.getArray_golem().get(golemUtilizzato).getArray_elementi().get(j).getNome_elemento());
                 }
                 System.out.println("\n\n\n\n\n\n");
+
                 // mostra piu volte
-                for (int s : scortaPietre.keySet()) {
-                    System.out.println(s + " " + scortaPietre.get(s).getNome_elemento());
+
+                System.out.println(PIETRE_RIMASTE_NELLA_SCORTA);
+                for (int s = 0; s < scortaPietre.size(); s++) {
+                    System.out.println(s +" "+ scortaPietre.get(s).getNome_elemento());
                 }
             }
-        }
-        //aggiunta pietre player 2 se il golem e senza pietre
-        if (player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
-            for (int i : scortaPietre.keySet()) {
-                System.out.println(i + " " + scortaPietre.get(i).getNome_elemento());
-            }
-            for (int i = 0; i < player2.getnPietre(); i++) {
-                System.out.println(String.format(INSERISCI_LA_PIETRA, player2.getNome()));
-                int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 0, scortaPietre.keySet().size());
-                player2.getArray_golem().get(golemUtilizzato).getArray_elementi().add(scortaPietre.get(pietraInserire));
-                scortaPietre.remove(pietraInserire);
-
-                //stampa
-                System.out.println(String.format(ELEMENTI_AGGIUNTI, player2.getNome()));
-                for (int j = 0; j < player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size(); j++) {
-                    System.out.println(player2.getArray_golem().get(golemUtilizzato).getArray_elementi().get(j).getNome_elemento());
-
+            //aggiunta pietre player 2 se il golem e senza pietre
+            if (player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
+                for (int i = 0 ; i< scortaPietre.size(); i++) {
+                    System.out.println(i +" "+ scortaPietre.get(i).getNome_elemento());
                 }
-                // mostra piu volte
-                for (int s : scortaPietre.keySet()) {
-                    System.out.println(s + " " + scortaPietre.get(s).getNome_elemento());
+                for (int i = 0; i < player2.getnPietre(); i++) {
+                    System.out.println(String.format(INSERISCI_LA_PIETRA, player2.getNome()));
+                    int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 0,scortaPietre.size()-1);
+                    player2.getArray_golem().get(golemUtilizzato).getArray_elementi().add(scortaPietre.get(pietraInserire));
+                    scortaPietre.remove(pietraInserire);
+
+                    //stampa
+                    System.out.println(String.format(ELEMENTI_AGGIUNTI, player2.getArray_golem().get(0).getNome(), player2.getNome()));
+                    for (int j = 0; j < player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size(); j++) {
+                        System.out.println(player2.getArray_golem().get(golemUtilizzato).getArray_elementi().get(j).getNome_elemento());
+
+                    }
+                    // mostra piu volte
+                    System.out.println(PIETRE_RIMASTE_NELLA_SCORTA);
+
+                    for (int s = 0; s < scortaPietre.size(); s++) {
+                        System.out.println(s +" "+ scortaPietre.get(s).getNome_elemento());
+                    }
                 }
             }
         }
@@ -255,40 +256,57 @@ public class Match {
 
 //metodo per l'attacco tra pietre e restituisce il danno
 
+    public void battagliaGolem () {
+            // indici delle pietre
+            // pietra player 1
+            int i = -1;
+            //pietra player
+            int j = -1;
+            int indice_elemento_primo_golem = 0;
+            int indice_elemento_secondo_golem = 0;
 
-    public void battagliaGolem() {
-        // indici delle pietre
-        // pietra player 1
-        int i = 0;
-        //pietra player
-        int j = 0;
-        int indice_elemento_primo_golem = 0;
-        int indice_elemento_secondo_golem = 0;
+            do {
+                // switch di  pietre
+                i = player1.getArray_golem().get(0).switchPietre(i);
+                j = player2.getArray_golem().get(0).switchPietre(j);
 
-        do {
-            for (int index = 0; index < equilibrio.getElementi_equilibrio().size(); index++) {
-                if (equilibrio.getElementi_equilibrio().get(index).getNome_elemento().
-                        equals(player1.getArray_golem().get(0).getArray_elementi().get(i))) {
-                    indice_elemento_primo_golem = index;
+                for (int index = 0; index <equilibrio.getElementi_equilibrio().size(); index++) {
+                    if (equilibrio.getElementi_equilibrio().get(index).getNome_elemento().equals(player2.getArray_golem().get(0).getArray_elementi().get(i).getNome_elemento())) {
+                        indice_elemento_secondo_golem = index;
+                    }
+                    if (equilibrio.getElementi_equilibrio().get(index).getNome_elemento().equals(player1.getArray_golem().get(0).getArray_elementi().get(j).getNome_elemento())) {
+                        indice_elemento_primo_golem = index;
+
+                    }
 
                 }
-                if (equilibrio.getElementi_equilibrio().get(index).getNome_elemento().
-                        equals(player2.getArray_golem().get(0).getArray_elementi().get(j))) {
-                    indice_elemento_secondo_golem = index;
-                }
-            }
-            // danno delle pietre
-            //Andando a leggere il valore presente nella tabella
-            player1.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
-                    get_adiacenza(indice_elemento_primo_golem, indice_elemento_secondo_golem));
-            player2.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
-                    get_adiacenza(indice_elemento_secondo_golem, indice_elemento_primo_golem));
+                /*Danno delle pietre: andando a leggere il valore presente nella tabella,
+                 * in caso sia diverso da 0, segna i danni nella vita del golem*/
+                player1.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
+                        get_adiacenza(indice_elemento_primo_golem, indice_elemento_secondo_golem));
+                player2.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
+                        get_adiacenza(indice_elemento_secondo_golem, indice_elemento_primo_golem));
+                // stampa vita
 
-            // switch di  pietre
-            player1.getArray_golem().get(0).switchPietre(i);
-            player2.getArray_golem().get(0).switchPietre(j);
-        } while (!player1.getArray_golem().get(0).isMorto() && !player2.getArray_golem().get(0).isMorto());
-        player2.cambiaGolem();
-        player1.cambiaGolem();
+                System.out.println(String.format(VITA_DEL_GOLEM,player1.getArray_golem().get(0).getNome() , player1.getNome() ));
+                System.out.println(player1.getArray_golem().get(0).getVita());
+                System.out.println(String.format(VITA_DEL_GOLEM,player2.getArray_golem().get(0).getNome() , player2.getNome() ));
+                System.out.println(player2.getArray_golem().get(0).getVita());
+
+            } while (!player2.getArray_golem().get(0).isMorto() && !player1.getArray_golem().get(0).isMorto());
+
     }
+
+
+
+
+
+
+
+
+
+//fine
+
 }
+
+

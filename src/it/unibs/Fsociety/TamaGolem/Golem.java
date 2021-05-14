@@ -71,12 +71,12 @@ public class Golem {
     }
 
     // quando il giocatore  la richiama andiamo a cambiargl lo la pietra
-    public int switchPietre(int i ){
+    public int  switchPietre(int i ){
         i++;
-        if ( i > array_elementi.size()){
+        if ( i >= array_elementi.size()){
             i=0;
-        }
 
+        }
         return i;
     }
 

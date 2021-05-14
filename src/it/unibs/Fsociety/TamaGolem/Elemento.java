@@ -84,5 +84,6 @@ public class Elemento {
             nuovo_equilibrio.put(i, tutti_elementi.get(indici_elementi_random.get(i)));
         }
         return nuovo_equilibrio;
+
     }
 }

@@ -50,6 +50,9 @@ public class Giocatore {
     }
 
 // ho tolto il for per provare a fare una cosa
+
+
+
     public void creaGolem(){
             for( int i= 0 ; i< nGolem; i++) {
                 String nomeGolem = InputDati.leggiStringa(" inserisci il nome del golem " + (i+1) + " ");
@@ -68,32 +71,7 @@ public class Giocatore {
     }
 
 
-  /*  public void evoluzione(int golemUtilizzato) {
-        // visualizzazione di tutte le pietre
 
-        // aggiunta pietre player 1 se  il golem e senza pietre
-        if (player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
-            for (int i : scortaPietre.keySet()) {
-                System.out.println(i + " " + scortaPietre.get(i).getNome_elemento());
-            }
-            for (int i = 0; i < player1.getnPietre(); i++) {
-                System.out.println("inserisci la pietra del player 1");
-                int pietraInserire = InputDati.leggiIntero(" inserisci la pietra che vuoi aggiungere nel player 1", 0, scortaPietre.keySet().size());
-                player1.getArray_golem().get(golemUtilizzato).getArray_elementi().add(scortaPietre.get(pietraInserire));
-                scortaPietre.remove(pietraInserire);
-
-                //stampa
-                System.out.println("elementi aggiunti al player 1");
-                for (int j = 0; j < player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size(); j++) {
-                    System.out.println(player1.getArray_golem().get(golemUtilizzato).getArray_elementi().get(j).getNome_elemento());
-                }
-                System.out.println("\n\n\n\n\n\n");
-                // mostra piu volte
-                for (int s : scortaPietre.keySet()) {
-                    System.out.println(s + " " + scortaPietre.get(s).getNome_elemento());
-                }
-            }
-        }*/
 
 
 
