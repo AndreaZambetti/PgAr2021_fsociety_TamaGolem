@@ -52,6 +52,7 @@ public class Giocatore {
     public void setnGolem(int nGolem) {
         this.nGolem = nGolem;
     }
+
     public int getnPietre() {
         return nPietre;
     }
@@ -60,8 +61,9 @@ public class Giocatore {
         this.nPietre = nPietre;
     }
 
-// ho tolto il for per provare a fare una cosa
-
+    public String getTipoPietraGolem (int i){
+        return this.getArray_golem().get(0).getArray_elementi().get(i).getNome_elemento();
+    }
 
 
     public void creaGolem(){

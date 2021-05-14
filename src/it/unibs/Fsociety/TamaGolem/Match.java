@@ -6,12 +6,17 @@ import java.util.ArrayList;
 
 // step uno capire cosa passargli
 public class Match {
-    public static final String ELEMENTI_AGGIUNTI = "\n\nquesti sono gli elementi aggiunti al golem %s del giocatore %s";
-    public static final String INSERISCI_LA_PIETRA = "inserisci la pietra di %s";
-    public static final String SCEGLI_IL_NUMERO_DELLA_PIETRA = "scegli il numero della pietra ";
-    public static final String INSERISCI_I_GOLEM_DEL_GIOCATORE = "inserisci i nomi del  golem del giocatore %s ";
-    public static final String PIETRE_RIMASTE_NELLA_SCORTA = "\npietre rimaste nella scorta";
-    public static final String VITA_DEL_GOLEM = "vita del golem %s del giocatore %s";
+    public static final String ELEMENTI_AGGIUNTI = "\n\nQuesti sono gli elementi aggiunti al golem %s del giocatore %s: ";
+    public static final String INSERISCI_LA_PIETRA = "%s inserisci la nuova pietra per il tuo golem: ";
+    public static final String SCEGLI_IL_NUMERO_DELLA_PIETRA = "Scegli il numero della pietra: ";
+    public static final String INSERISCI_I_GOLEM_DEL_GIOCATORE = "%s inserisci i nomi per i tuoi golem: ";
+    public static final String PIETRE_RIMASTE_NELLA_SCORTA = "\nLa scorta contiene: ";
+    public static final String VITA_DEL_GOLEM = "Vita del golem %s del giocatore %s";
+    public static final String SCEGLI_IL_LIVELLO_DELLA_PARTITA = "Scegliete il livello della partita\n" +
+            "1) facile (5 elementi)\n" +
+            "2) medio(7 elementi)\n" +
+            "3) difficile (9 elementi)\n" +
+            "Insersci il livello di difficolta che preferisci: ";
 
 
     private boolean conclusa = false;
@@ -19,14 +24,19 @@ public class Match {
     private Giocatore player2;
     private int lDifficolta;
     private Equilibrio equilibrio;
-    private ArrayList<Elemento> scortaPietre = new ArrayList<>();
+    private ArrayList<Elemento> scortaPietre;
 
 
-    public Match(Giocatore player1, Giocatore player2) {
+    public Match() {
+
+        Giocatore player1 = new Giocatore();
+        Giocatore player2 = new Giocatore();
+        player1.setNome(1);
+        player2.setNome(2);
 
         this.player1 = player1;
         this.player2 = player2;
-
+        this.scortaPietre = new ArrayList<Elemento>();
 
     }
 
@@ -172,42 +182,35 @@ public class Match {
     }
 
 
-    // METODO CHE RITORNA IL VINCITORE DELLA PARTITA ( quando il numero di golem è zero)
+    // METODO CHE STAMPA IL VINCITORE DELLA PARTITA ( quando il numero di golem è zero)
     // quando la andremo a dichiarare nel main andra richiamata la classe vincitore e se
     // la classe vincirore e uguale  non e vuota allora persiste il vincitore e si fermera il ciclo
     public void vediVincitore() {
         if (player1.getArray_golem().size()==0) {
 
-            System.out.println(String.format(" il vincitore e %s", player2.getNome()));
+            System.out.println(String.format("Congratulazioni!\n%s sei il vincitore\n%s andrà meglio la prossima volta",
+                    player2.getNome(), player1.getNome()));
 
         }
         else if (player2.getArray_golem().size()==0) {
 
-            System.out.println(String.format(" il vincitore e %s", player1.getNome()));
+            System.out.println(String.format("Congratulazioni!\n%s sei il vincitore\n%s andrà meglio la prossima volta",
+                    player1.getNome(), player2.getNome()));
         }
     }
 
 
-
-
-
-
-
-// DA FARE
-    // AGGIUNTA PITRRE AL GOLEM CHE LO STA RICHIAMANDO
-
     public void evoluzione(int golemUtilizzato) {
-        // visualizzazione di tutte le pietre
 
         // aggiunta pietre player 1 se  il golem e senza pietre
         if(!player1.getArray_golem().isEmpty()) {
-            if (player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0 && !player1.getArray_golem().isEmpty()) {
-                for (int i = 0; i < scortaPietre.size(); i++) {
-                    System.out.println(i + " " + scortaPietre.get(i).getNome_elemento());
-                }
+            if (player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
                 for (int i = 0; i < player1.getnPietre(); i++) {
+
+                    stampaPietreScorta();
+
                     System.out.println(String.format(INSERISCI_LA_PIETRA, player1.getNome()));
-                    int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 0, scortaPietre.size() - 1);
+                    int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 1, scortaPietre.size()) - 1;
                     player1.getArray_golem().get(golemUtilizzato).getArray_elementi().add(scortaPietre.get(pietraInserire));
                     scortaPietre.remove(pietraInserire);
 
@@ -216,14 +219,7 @@ public class Match {
                     for (int j = 0; j < player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size(); j++) {
                         System.out.println(player1.getArray_golem().get(golemUtilizzato).getArray_elementi().get(j).getNome_elemento());
                     }
-                    System.out.println("\n\n\n\n\n\n");
-
-                    // mostra piu volte
-
-                    System.out.println(PIETRE_RIMASTE_NELLA_SCORTA);
-                    for (int s = 0; s < scortaPietre.size(); s++) {
-                        System.out.println(s + " " + scortaPietre.get(s).getNome_elemento());
-                    }
+                    System.out.println("\n\n");
                 }
             }
         }
@@ -231,32 +227,28 @@ public class Match {
         //aggiunta pietre player 2 se il golem e senza pietre
         if(!player2.getArray_golem().isEmpty()) {
             if (player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
-                for (int i = 0; i < scortaPietre.size(); i++) {
-                    System.out.println(i + " " + scortaPietre.get(i).getNome_elemento());
-                }
                 for (int i = 0; i < player2.getnPietre(); i++) {
+
+                    stampaPietreScorta();
+
                     System.out.println(String.format(INSERISCI_LA_PIETRA, player2.getNome()));
-                    int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 0, scortaPietre.size() - 1);
+                    int pietraInserire = InputDati.leggiIntero(SCEGLI_IL_NUMERO_DELLA_PIETRA, 1, scortaPietre.size()) - 1;
                     player2.getArray_golem().get(golemUtilizzato).getArray_elementi().add(scortaPietre.get(pietraInserire));
                     scortaPietre.remove(pietraInserire);
+
                     //stampa
                     System.out.println(String.format(ELEMENTI_AGGIUNTI, player2.getArray_golem().get(0).getNome(), player2.getNome()));
                     for (int j = 0; j < player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size(); j++) {
                         System.out.println(player2.getArray_golem().get(golemUtilizzato).getArray_elementi().get(j).getNome_elemento());
                     }
-                    // mostra piu volte
-                    System.out.println(PIETRE_RIMASTE_NELLA_SCORTA);
-
-                    for (int s = 0; s < scortaPietre.size(); s++) {
-                        System.out.println(s + " " + scortaPietre.get(s).getNome_elemento());
-                    }
+                    System.out.println("\n\n");
                 }
             }
         }
     }
 
-//metodo per l'attacco tra pietre e restituisce il danno
 
+    //metodo per l'attacco tra pietre e restituisce il danno
     public void battagliaGolem () {
             // indici delle pietre
             // pietra player 1
@@ -272,10 +264,10 @@ public class Match {
                 j = player2.getArray_golem().get(0).switchPietre(j);
 
                 for (int index = 0; index <equilibrio.getElementi_equilibrio().size(); index++) {
-                    if (equilibrio.getNomeElementoEquilibrio(index).equals(player2.getArray_golem().get(0).getArray_elementi().get(i).getNome_elemento())) {
+                    if (equilibrio.getNomeElementoEquilibrio(index).equals(player2.getTipoPietraGolem(i))) {
                         indice_elemento_secondo_golem = index;
                     }
-                    if (equilibrio.getNomeElementoEquilibrio(index).equals(player1.getArray_golem().get(0).getArray_elementi().get(j).getNome_elemento())) {
+                    if (equilibrio.getNomeElementoEquilibrio(index).equals(player1.getTipoPietraGolem(i))) {
                         indice_elemento_primo_golem = index;
 
                     }
@@ -298,16 +290,49 @@ public class Match {
 
     }
 
+    private void stampaPietreScorta(){
 
+        System.out.println(PIETRE_RIMASTE_NELLA_SCORTA);
 
+        int indice;
+        for (int i = 0; i < scortaPietre.size(); i++) {
+            if(i != 0 && !scortaPietre.get(i).getNome_elemento().equals(scortaPietre.get(i-1).getNome_elemento()))
+                System.out.println();
+            indice = i + 1;
+            System.out.print(indice + ": " + scortaPietre.get(i).getNome_elemento() + ";\t");
+        }
+        System.out.println();
+    }
 
+    public static boolean continuaGioco(){
+        boolean continua = InputDati.yesOrNo("Volete continuare a giocare? ");
+        if (continua){
+            System.out.println("OTTIMO! Procediamo\n\n");
+        } else {
+            System.out.println("Peccato, sarà per un'altra volta");
+        }
+        return continua;
+    }
 
+    public void partita(){
+        int livello = InputDati.leggiIntero(SCEGLI_IL_LIVELLO_DELLA_PARTITA, 1, 3);
+        this.scegliLivelloDifficolta(livello);
+        this.evoluzione(0);
 
+        do {
+            boolean attacco = InputDati.yesOrNo("Procedere? ");
+            this.battagliaGolem();
 
+            this.getPlayer1().cambiaGolem();
+            this.evoluzione(0);
+            this.getPlayer2().cambiaGolem();
+            this.evoluzione(0);
 
+        } while (!this.getPlayer1().getArray_golem().isEmpty() && !this.getPlayer2().getArray_golem().isEmpty());
 
-//fine
-
+        this.vediVincitore();
+        this.getEquilibrio().stampaEquilibrio();
+    }
 }
 
 

@@ -51,6 +51,7 @@ public class Equilibrio {
         int somma_riga = 0;
         int somma_colonna = 0;
 
+        System.out.println("EQUILIBRIO:");
         System.out.print("\t\t ");
 
         //Stampa nomi elementi
