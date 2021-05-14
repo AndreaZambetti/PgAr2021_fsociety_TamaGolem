@@ -242,7 +242,7 @@ public class Match {
             // indici delle pietre
             // pietra player 1
             int i = -1;
-            //pietra player
+            //pietra player 2
             int j = -1;
             int indice_elemento_primo_golem = 0;
             int indice_elemento_secondo_golem = 0;
@@ -262,14 +262,14 @@ public class Match {
                     }
 
                 }
-                /*Danno delle pietre: andando a leggere il valore presente nella tabella,
+                /**Danno delle pietre: andando a leggere il valore presente nella tabella,
                  * in caso sia diverso da 0, segna i danni nella vita del golem*/
                 player1.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
                         get_adiacenza(indice_elemento_primo_golem, indice_elemento_secondo_golem));
                 player2.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
                         get_adiacenza(indice_elemento_secondo_golem, indice_elemento_primo_golem));
-                // stampa vita
 
+                //stampa vita
                 System.out.println(String.format(VITA_DEL_GOLEM,player1.getArray_golem().get(0).getNome() , player1.getNome() ));
                 System.out.println(player1.getArray_golem().get(0).getVita());
                 System.out.println(String.format(VITA_DEL_GOLEM,player2.getArray_golem().get(0).getNome() , player2.getNome() ));
