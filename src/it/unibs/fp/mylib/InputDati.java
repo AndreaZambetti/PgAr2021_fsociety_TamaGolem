@@ -1,4 +1,4 @@
-package it.unibs.Fsociety.TamaGolem;
+package it.unibs.fp.mylib;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,7 +21,6 @@ public class InputDati
 	  private static Scanner creaScanner ()
 	  {
 	   Scanner creato = new Scanner(System.in);
-	   creato.useDelimiter(System.getProperty("line.separator"));
 	   return creato;
 	  }
 	  
