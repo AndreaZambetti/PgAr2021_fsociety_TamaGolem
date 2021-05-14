@@ -1,6 +1,6 @@
 package it.unibs.Fsociety.TamaGolem;
 
-import it.unibs.fp.mylib.InputDati;
+//import it.unibs.fp.mylib.InputDati;
 
 
 
@@ -22,6 +22,7 @@ public class Main {
         //creazione 2 giocatori
         Giocatore player1 = creaGiocatore(1);
         Giocatore player2 = creaGiocatore(2);
+
         //CREAZIONE LIVELLO
         match = new Match(player1, player2);
         int livello = InputDati.leggiIntero(SCEGLI_IL_LIVELLO_DELLA_PARTITA, 1, 3);
@@ -39,7 +40,7 @@ public class Main {
         }while (!player1.getArray_golem().isEmpty() && !player2.getArray_golem().isEmpty());
         //visualizza il vincitore
         match.vediVincitore();
-        /*equilibrio.stampaEquilibrio();*/
+        //equilibrio.stampaEquilibrio();
 
 
     }

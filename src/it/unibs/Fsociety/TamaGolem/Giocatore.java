@@ -1,6 +1,6 @@
 package it.unibs.Fsociety.TamaGolem;
 
-import it.unibs.fp.mylib.InputDati;
+//import it.unibs.fp.mylib.InputDati;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,9 @@ public class Giocatore {
         this.nome = nome;
     }
 
+    //Creato da Diego venerdì
+    public Giocatore() { }
+
     public ArrayList<Golem> getArray_golem() {
         return array_golem;
     }
@@ -30,8 +33,14 @@ public class Giocatore {
         return nome;
     }
 
-    public void setNome(String nome) {
+    //Modificato da Diego venerdì
+    public void setNome1(String nome) {
         this.nome = nome;
+    }
+
+    //Modificato da Diego venerdì
+    public void setNome(int i) {
+        this.nome = InputDati.leggiStringa(String.format("inserisci il nome del player %d\t", i ));
     }
 
     public int getnGolem() {

@@ -1,6 +1,6 @@
 package it.unibs.Fsociety.TamaGolem;
 
-import it.unibs.fp.mylib.InputDati;
+//import it.unibs.fp.mylib.InputDati;
 
 
 import java.util.ArrayList;
@@ -174,16 +174,16 @@ public class Match {
     }
 
 
-    // METODO CHE RITORNA IL VINCITORE DELLA PARTITA ( quando il numero di golem e zero)
+    // METODO CHE RITORNA IL VINCITORE DELLA PARTITA ( quando il numero di golem è zero)
     // quando la andremo a dichiarare nel main andra richiamata la classe vincitore e se
-    // la classe vincirore e uguale  non e vuota allora pesiste il vincitore e si fermera il ciclo
+    // la classe vincirore e uguale  non e vuota allora persiste il vincitore e si fermera il ciclo
     public void vediVincitore() {
-        if (player1.getArray_golem().size()<=0) {
+        if (player1.getArray_golem().size()==0) {
 
             System.out.println(String.format(" il vincitore e %s", player2.getNome()));
 
         }
-        if (player2.getArray_golem().size()<=0) {
+        else if (player2.getArray_golem().size()==0) {
 
             System.out.println(String.format(" il vincitore e %s", player1.getNome()));
         }
