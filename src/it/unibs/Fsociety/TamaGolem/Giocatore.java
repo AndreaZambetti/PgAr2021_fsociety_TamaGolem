@@ -1,10 +1,12 @@
 package it.unibs.Fsociety.TamaGolem;
 
-
-
 import it.unibs.fp.mylib.InputDati;
 
 import java.util.ArrayList;
+
+/**
+ * crea il giocatore
+ */
 
 public class Giocatore {
 
@@ -65,6 +67,10 @@ public class Giocatore {
         return this.getArray_golem().get(0).getArray_elementi().get(i).getNome_elemento();
     }
 
+    /**
+     *  metodo per la creazione del golem crea golem
+     * @ return void
+     */
 
     public void creaGolem(){
             for( int i= 0 ; i< nGolem; i++) {
@@ -74,7 +80,10 @@ public class Giocatore {
     }
 
 
-    // METODO CHE VA A CAMBIARE IL GOLEM  (i = golem player 1  j = golem player 2)
+    /**
+     * metodo per cambiare il golem
+     * @return
+     */
     public void cambiaGolem() {
 
         if (getArray_golem().get(0).isMorto()) {

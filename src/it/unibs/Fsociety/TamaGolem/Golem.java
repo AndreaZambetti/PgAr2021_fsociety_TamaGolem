@@ -2,6 +2,7 @@ package it.unibs.Fsociety.TamaGolem;
 
 import java.util.ArrayList;
 
+
 public class Golem {
 
     private static final int MAX_VITA = 30;
@@ -14,7 +15,6 @@ public class Golem {
 
     public Golem( String nome) {
         this.array_elementi = new ArrayList<>();
-        /*this.pietre = pietre;*/
         this.nome = nome;
         this.setVita(MAX_VITA);
         this.setMorto(false);
@@ -52,6 +52,7 @@ public class Golem {
 
     }
 
+
     public int getNumeroPietre() {
         return this.array_elementi.size();
     }
@@ -64,6 +65,11 @@ public class Golem {
         return this.morto;
     }
 
+    /**
+     * metodo per togliere la vita
+     * @param danno
+     * @return
+     */
 
     public int togliVita(int danno){
 
@@ -71,7 +77,11 @@ public class Golem {
         return this.vita;
     }
 
-    // quando il giocatore  la richiama andiamo a cambiargl lo la pietra
+    /**
+     * metodo per il cambiamento delle pietre
+     * @param i
+     * @return
+     */
     public int  switchPietre(int i ){
         i++;
         if ( i >= array_elementi.size()){

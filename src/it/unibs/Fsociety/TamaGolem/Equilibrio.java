@@ -7,6 +7,7 @@ public class Equilibrio {
     private HashMap<Integer, Elemento> elementi_equilibrio;
     private Grafo interazione_elementi;
 
+
     public Equilibrio(HashMap<Integer, Elemento> elementi_equilibrio) {
         this.elementi_equilibrio = elementi_equilibrio;
     }
@@ -30,6 +31,11 @@ public class Equilibrio {
         this.interazione_elementi = interazione_elementi;
     }
 
+    /**
+     * metodo che permette di generare lequilibrio
+     * @param numero_elementi
+     * @return Equilibrio
+     */
     public static Equilibrio genera_equilibrio(int numero_elementi) {
 
         //Creazione dell'oggetto Elemento necessario per richimare il metodo di creazione dell'equilibrio
@@ -47,6 +53,10 @@ public class Equilibrio {
         return equilibrio_partita;
     }
 
+    /**
+     * metodo che serve per stampare l`equilibrio
+     * @return void
+     */
     public void stampaEquilibrio() {
         int somma_riga = 0;
         int somma_colonna = 0;

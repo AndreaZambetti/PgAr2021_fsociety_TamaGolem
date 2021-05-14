@@ -34,6 +34,10 @@ public class Grafo {
         this.matrice_adiacenze = matrice_adiacenze;
     }
 
+    /**
+     * metodo che genera lequilibrio
+     * @return void
+     */
     public void imposta_interazione_elementi(){
 
         //Set<Integer> lista_casi_da_assegnare = new HashSet<>();

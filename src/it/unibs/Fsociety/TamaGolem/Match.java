@@ -2,9 +2,14 @@ package it.unibs.Fsociety.TamaGolem;
 import it.unibs.fp.mylib.InputDati;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-// step uno capire cosa passargli
+/**
+ * racchiude tutti gli elementi del match
+ */
 public class Match {
     public static final String ELEMENTI_AGGIUNTI = "\n\nQuesti sono gli elementi aggiunti al golem %s del giocatore %s: ";
     public static final String INSERISCI_LA_PIETRA = "%s inserisci la nuova pietra per il tuo golem: ";
@@ -17,6 +22,12 @@ public class Match {
             "2) medio(7 elementi)\n" +
             "3) difficile (9 elementi)\n" +
             "Insersci il livello di difficolta che preferisci: ";
+    public static final String VINITO_DA_S_DEL_GIOCATORE_S = " lo scontro e` stato vinto da %s del giocatore %s";
+    public static final String ATTACCOGOLEMPIETRA = "attacco: golem %s    pietra %s ";
+    public static final String PROCEDERE = "Procedere? ";
+    public static final String VOLETE_CONTINUARE_A_GIOCARE = "Volete continuare a giocare? ";
+    public static final String OTTIMO_PROCEDIAMO = "OTTIMO! Procediamo\n\n";
+    public static final String PECCATO_SARÀ_PER_UN_ALTRA_VOLTA = "Peccato, sarà per un'altra volta";
 
     private boolean conclusa = false;
     private Giocatore player1;
@@ -94,6 +105,11 @@ public class Match {
         this.scortaPietre = scortaPietre;
     }
 
+    /**
+     * metodo  per scegliere il livello di difficolta
+     * @param lDifficolta
+     * @return void
+     */
     public void scegliLivelloDifficolta(int lDifficolta) {
         Elemento.riempi_tutti_elementi();
 
@@ -173,9 +189,10 @@ public class Match {
 
     }
 
-    // METODO CHE STAMPA IL VINCITORE DELLA PARTITA ( quando il numero di golem è zero)
-    // quando la andremo a dichiarare nel main andra richiamata la classe vincitore e se
-    // la classe vincirore e uguale  non e vuota allora persiste il vincitore e si fermera il ciclo
+    /**
+     * viene richiamata nel main e si usa per andare e vedere chi e il vincitore
+     * @return vincitore
+     */
     public void vediVincitore() {
         if (player1.getArray_golem().size()==0) {
 
@@ -190,11 +207,18 @@ public class Match {
         }
     }
 
+    /**
+     * metodo utilizzato per andare a sostituire il pockemon alla sua morte
+     * @return void
+     * @param golemUtilizzato
+     */
     public void evoluzione(int golemUtilizzato) {
 
         // aggiunta pietre player 1 se  il golem e senza pietre
         if(!player1.getArray_golem().isEmpty()) {
+
             if (player1.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
+                System.out.println(String.format(VINITO_DA_S_DEL_GIOCATORE_S,player2.getArray_golem().get(golemUtilizzato).getNome(),player2.getNome()));
                 for (int i = 0; i < player1.getnPietre(); i++) {
 
                     stampaPietreScorta();
@@ -212,11 +236,14 @@ public class Match {
                     System.out.println("\n\n");
                 }
             }
+
         }
 
         //aggiunta pietre player 2 se il golem e senza pietre
         if(!player2.getArray_golem().isEmpty()) {
             if (player2.getArray_golem().get(golemUtilizzato).getArray_elementi().size() == 0) {
+                System.out.println(String.format(VINITO_DA_S_DEL_GIOCATORE_S,player1.getArray_golem().get(golemUtilizzato).getNome(),player1.getNome()));
+
                 for (int i = 0; i < player2.getnPietre(); i++) {
 
                     stampaPietreScorta();
@@ -234,11 +261,17 @@ public class Match {
                     System.out.println("\n\n");
                 }
             }
+
         }
+
     }
 
-    //metodo per l'attacco tra pietre e restituisce il danno
-    public void battagliaGolem () {
+    /**
+     * metodo per la batttaglia tra 2 pockemon
+     * @return void
+     */
+    public void battagliaGolem () throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
             // indici delle pietre
             // pietra player 1
             int i = -1;
@@ -269,16 +302,32 @@ public class Match {
                 player2.getArray_golem().get(0).togliVita(equilibrio.getInterazione_elementi().
                         get_adiacenza(indice_elemento_secondo_golem, indice_elemento_primo_golem));
 
+                // stampa
+                System.out.println(String.format(ATTACCOGOLEMPIETRA,
+                        player1.getArray_golem().get(0).getNome(),player1.getArray_golem().get(0).getArray_elementi().get(i).getNome_elemento()));
+                System.out.println(String.format(ATTACCOGOLEMPIETRA,
+                           player2.getArray_golem().get(0).getNome(),player2.getArray_golem().get(0).getArray_elementi().get(j).getNome_elemento()));
+                System.out.println("\n");
                 //stampa vita
                 System.out.println(String.format(VITA_DEL_GOLEM,player1.getArray_golem().get(0).getNome() , player1.getNome() ));
                 System.out.println(player1.getArray_golem().get(0).getVita());
                 System.out.println(String.format(VITA_DEL_GOLEM,player2.getArray_golem().get(0).getNome() , player2.getNome() ));
                 System.out.println(player2.getArray_golem().get(0).getVita());
 
+                System.out.println("Premere il tasto invio  per continuare");
+                br.readLine();
+
+                
+
+
             } while (!player2.getArray_golem().get(0).isMorto() && !player1.getArray_golem().get(0).isMorto());
 
     }
 
+    /**
+     * metodo per la stampa delle pietre
+     * @return void
+     */
     private void stampaPietreScorta(){
 
         System.out.println(PIETRE_RIMASTE_NELLA_SCORTA);
@@ -293,24 +342,34 @@ public class Match {
         System.out.println();
     }
 
+    /**
+     * metodo per ricomincaire la partita
+     * @return boolean
+     *
+     */
     public static boolean continuaGioco(){
-        boolean continua = InputDati.yesOrNo("Volete continuare a giocare? ");
+        boolean continua = InputDati.yesOrNo(VOLETE_CONTINUARE_A_GIOCARE);
         if (continua){
-            System.out.println("OTTIMO! Procediamo\n\n");
+            System.out.println(OTTIMO_PROCEDIAMO);
         } else {
-            System.out.println("Peccato, sarà per un'altra volta");
+            System.out.println(PECCATO_SARÀ_PER_UN_ALTRA_VOLTA);
         }
         return continua;
     }
 
-    public void partita(){
+    /**
+     * metodo partita
+     * @return void
+     */
+    public void partita() throws IOException {
         int livello = InputDati.leggiIntero(SCEGLI_IL_LIVELLO_DELLA_PARTITA, 1, 3);
         this.scegliLivelloDifficolta(livello);
         this.evoluzione(0);
 
         do {
-            boolean attacco = InputDati.yesOrNo("Procedere? ");
+            boolean attacco = InputDati.yesOrNo(PROCEDERE);
             this.battagliaGolem();
+
 
             this.getPlayer1().cambiaGolem();
             this.evoluzione(0);
@@ -322,4 +381,7 @@ public class Match {
         this.vediVincitore();
         this.getEquilibrio().stampaEquilibrio();
     }
+
+
+
 }

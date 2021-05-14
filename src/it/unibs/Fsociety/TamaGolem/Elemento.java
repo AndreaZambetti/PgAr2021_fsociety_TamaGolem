@@ -58,6 +58,10 @@ public class Elemento {
         return new ArrayList<Integer>(lista_codici_elementi);
     }
 
+    /**
+     * metodo per riempire tutti gli elementi
+     * @return void
+     */
     public static void riempi_tutti_elementi(){
         //Inizializzazione degli elementi in un HashMap di riferimento,
         // chiamare questa funzione una volta all'avvio del programma nel Main.
@@ -72,6 +76,11 @@ public class Elemento {
         tutti_elementi.put(8, elemento_tuono);
     }
 
+    /**
+     * metodo per inizializzare gli elementi
+     * @param numero_elementi
+     * @return
+     */
     public  HashMap<Integer, Elemento> inizializzaElementiEquilibrio(int numero_elementi){
         HashMap<Integer, Elemento> nuovo_equilibrio = new HashMap<>();
 
